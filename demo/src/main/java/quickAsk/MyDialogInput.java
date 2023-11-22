@@ -12,7 +12,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.util.ui.UIUtil;
 //import com.obiscr.chatgpt.settings.OpenAISettingsState;
-//import com.obiscr.tabnine.userSettings.AppSettingsState;
+//import setting.AppSettingsState;
 //import com.qianliuAiUi.JcefBrowserDiffService;
 //import com.qianliuAiUi.JcefBrowserService;
 import org.jetbrains.annotations.NotNull;

@@ -8,7 +8,7 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.obiscr.chatgpt.core.TokenManager;
-import com.obiscr.tabnine.userSettings.AppSettingsState;
+import setting.AppSettingsState;
 
 import javax.swing.*;
 import java.io.*;

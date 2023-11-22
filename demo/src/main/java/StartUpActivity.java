@@ -1,5 +1,4 @@
 import browse.JcefBrowserService;
-import com.intellij.execution.Platform;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
@@ -7,7 +6,7 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.util.messages.MessageBus;
-import com.obiscr.tabnine.userSettings.AppSettingsState;
+import setting.AppSettingsState;
 import ideActions.editor.CloseDocumentListener;
 import com.qianliuAiUi.ideActions.editor.SchemeChangeListener;
 import com.qianliuAiUi.ideActions.editor.SelectDocumentListener;
@@ -21,11 +20,8 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.Resource;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 
 public class StartUpActivity implements StartupActivity.DumbAware{

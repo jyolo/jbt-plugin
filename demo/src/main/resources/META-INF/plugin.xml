@@ -66,7 +66,7 @@
 <!--        <editorActionHandler action="EditorEscape" implementationClass="com.obiscr.tabnine.inline.EscapeHandler" id="previewEscape" order="before hide-hints"/>-->
 <!--        <editorFactoryDocumentListener implementation="com.obiscr.tabnine.inline.TabnineDocumentListener"/>-->
 <!--        <editorFactoryDocumentListener implementation="com.obiscr.tabnine.inline.TabnineDocumentListener"/>-->
-<!--        <applicationService serviceImplementation="com.obiscr.tabnine.userSettings.AppSettingsState"/>-->
+<!--        <applicationService serviceImplementation="setting.AppSettingsState"/>-->
 <!--        <fileType name="Tabnine project model file" implementationClass="com.obiscr.tabnine.TabnineProjectModelFileType" extensions="tabnine,.tabnine,tabnine.model,.tabnine.model,model,.model"/>-->
 <!--        <fileType name="Tabnine ignore file" implementationClass="com.obiscr.tabnine.TabnineIgnoreFileType" extensions="tabnineignore"/>-->
     </extensions>
