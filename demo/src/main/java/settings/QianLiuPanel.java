@@ -25,7 +25,7 @@ public class QianLiuPanel implements Configurable, Disposable {
     }
 
     private void init() {
-        apiKeyField.getEmptyText().setText(ChatGPTBundle.message("system.setting.token.text"));
+        apiKeyField.getEmptyText().setText("ASDASDDASDADSD");
     }
 
 
