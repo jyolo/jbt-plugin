@@ -25,6 +25,70 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="千流AI" anchor="right" canCloseContents="true" icon="/icons/toolWindow.svg"
+                    factoryClass="com.qianliuAiUi.AiReviewWindowFactory" />
 
+        <notificationGroup id="webViewNotifications" displayType="BALLOON" toolWindowId="千流AI" />
+
+        <applicationConfigurable instance="com.obiscr.chatgpt.settings.QianLiuPanel" id="Qianliu-AI" parentId="tools" displayName="千流AI - 你的AI编程助手">
+            <configurable instance="com.obiscr.chatgpt.settings.GPT3_35_TurboPanel" id="com.obiscr.chatgpt.settings.GPT3-3.5-Turbo" displayName="千流AI"/>
+            <configurable instance="com.obiscr.tabnine.userSettings.ApplicationConfigurable" id="com.obiscr.tabnine.userSettings.ApplicationConfigurable" displayName="智能代码补全"/>
+            <configurable instance="com.qianliuAiUi.settings.SettingsPanel" id="com.qianliuAiUi.settings.SettingsPanel" displayName="千流AI代码Review" />
+        </applicationConfigurable>
+        <applicationService serviceImplementation="com.obiscr.chatgpt.settings.OpenAISettingsState"/>
+        <applicationService serviceImplementation="com.obiscr.chatgpt.core.TokenManager"/>
+        <applicationService serviceImplementation="com.qianliuAiUi.settings.AiReviewSettingsState"/>
+        <fileDocumentManagerListener implementation="com.qianliuAiUi.ideActions.editor.SaveDocumentListener"/>
+
+        <projectService serviceImplementation="com.obiscr.chatgpt.core.ConversationManager"/>
+        <projectService serviceImplementation="com.obiscr.chatgpt.core.SendAction"/>
+        <projectService serviceImplementation="com.obiscr.chatgpt.ChatGPTHandler"/>
+        <projectService serviceImplementation="com.qianliuAiUi.JcefBrowserService"/>
+        <projectService serviceImplementation="com.qianliuAiUi.JcefBrowserDiffService"/>
+        <projectService serviceImplementation="com.qianliuAiUi.EditorGutterIconService"/>
+        <postStartupActivity implementation="com.common.ideStartUpActivity"/>
+        <postStartupActivity implementation="com.obiscr.chatgpt.core.StartUpActivity"/>
+        <postStartupActivity implementation="com.qianliuAiUi.StartUpActivity"/>
+        <preloadingActivity implementation="com.obiscr.tabnine.Initializer"/>
+        <preloadingActivity implementation="com.obiscr.tabnine.general.GettingStartedManager"/>
+        <postStartupActivity implementation="com.obiscr.tabnine.Initializer"/>
+        <statusBarWidgetProvider implementation="com.qianliuAiUi.statusBar.StatusBarProvider"/>
+        <statusBarWidgetProvider implementation="com.obiscr.tabnine.statusBar.StatusBarProvider"/>
+        <!--        <statusBarWidgetProvider implementation="com.tabnine.statusBar.StatusBarPromotionProvider"/>-->
+        <completion.contributor language="any" implementationClass="com.obiscr.tabnine.intellij.completions.TabNineCompletionContributor" order="first"/>
+
+        <applicationService serviceImplementation="com.obiscr.tabnine.lifecycle.BinaryStateService"/>
+        <applicationService serviceImplementation="com.obiscr.tabnine.capabilities.CapabilitiesService"/>
+        <applicationService serviceImplementation="com.obiscr.tabnine.lifecycle.LifeCycleHelper"/>
+        <applicationService serviceImplementation="com.obiscr.tabnine.general.BrowserUtilsService"/>
+
+        <actionPromoter implementation="com.obiscr.tabnine.inline.InlineActionsPromoter"/>
+        <editorActionHandler action="EditorEscape" implementationClass="com.obiscr.tabnine.inline.EscapeHandler" id="previewEscape" order="before hide-hints"/>
+        <editorFactoryDocumentListener implementation="com.obiscr.tabnine.inline.TabnineDocumentListener"/>
+        <editorFactoryDocumentListener implementation="com.obiscr.tabnine.inline.TabnineDocumentListener"/>
+        <applicationService serviceImplementation="com.obiscr.tabnine.userSettings.AppSettingsState"/>
+        <fileType name="Tabnine project model file" implementationClass="com.obiscr.tabnine.TabnineProjectModelFileType" extensions="tabnine,.tabnine,tabnine.model,.tabnine.model,model,.model"/>
+        <fileType name="Tabnine ignore file" implementationClass="com.obiscr.tabnine.TabnineIgnoreFileType" extensions="tabnineignore"/>
     </extensions>
+
+    <actions>
+        <action class="com.qianliuAiUi.quickAsk.ShortCutAction" id="quickAskShortCutAction" text="qianliuAiUiQuickAsk" >
+            <keyboard-shortcut first-keystroke="alt pressed I" keymap="$default" replace-all="true"/>
+        </action>
+        <action class="com.obiscr.tabnine.CompltionActions" id="CompeltionAction" text="manual Completion">
+            <keyboard-shortcut first-keystroke="alt pressed A" keymap="$default"/>
+        </action>
+        <action class="com.qianliuAiUi.ideActions.ui.AiReviewShortCutAction" id="qianliuAiUiShortCutAction" text="qianliuAiUi">
+            <keyboard-shortcut first-keystroke="alt pressed R" keymap="$default"/>
+        </action>
+        <action class="com.obiscr.tabnine.inline.ShowNextTabnineInlineCompletionAction" id="ShowNextTabnineInlineCompletionAction" text="Show Next Inline Completion">
+            <keyboard-shortcut first-keystroke="alt CLOSE_BRACKET" keymap="$default"/>
+        </action>
+        <action class="com.obiscr.tabnine.inline.ShowPreviousTabnineInlineCompletionAction" id="ShowPreviousTabnineInlineCompletionAction" text="Show Previous Inline Completion">
+            <keyboard-shortcut first-keystroke="alt OPEN_BRACKET" keymap="$default"/>
+        </action>
+        <action class="com.obiscr.tabnine.inline.AcceptTabnineInlineCompletionAction" id="AcceptTabnineInlineCompletionAction" text="Accept Inline Completion">
+            <keyboard-shortcut first-keystroke="TAB" keymap="$default"/>
+        </action>
+    </actions>
 </idea-plugin>

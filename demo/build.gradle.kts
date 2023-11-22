@@ -11,6 +11,16 @@ repositories {
     mavenCentral()
 }
 
+dependencies{
+    implementation("org.eclipse.jetty:jetty-server:9.4.49.v20220914")
+    implementation("org.eclipse.jetty:jetty-servlet:9.4.49.v20220914")
+    implementation("org.eclipse.jetty:jetty-proxy:9.4.49.v20220914")
+    implementation("org.eclipse.jetty:jetty-webapp:9.4.49.v20220914")
+
+    implementation("com.alibaba.fastjson2:fastjson2:2.0.17")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+}
+
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
