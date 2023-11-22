@@ -1,4 +1,4 @@
-package com.qianliuAiUi.quickAsk;
+package quickAsk;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.common.util;
@@ -11,10 +11,10 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.util.ui.UIUtil;
-import com.obiscr.chatgpt.settings.OpenAISettingsState;
-import com.obiscr.tabnine.userSettings.AppSettingsState;
-import com.qianliuAiUi.JcefBrowserDiffService;
-import com.qianliuAiUi.JcefBrowserService;
+//import com.obiscr.chatgpt.settings.OpenAISettingsState;
+//import com.obiscr.tabnine.userSettings.AppSettingsState;
+//import com.qianliuAiUi.JcefBrowserDiffService;
+//import com.qianliuAiUi.JcefBrowserService;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -246,7 +246,7 @@ class MyDialogInput extends DialogWrapper {
                 executorService.submit(() -> {
                     // 处理请求
                     addHistory(inputContent);
-                    OpenAISettingsState instance = OpenAISettingsState.getInstance();
+//                    OpenAISettingsState instance = OpenAISettingsState.getInstance();
                     request.doRequest(loadingTimer, inputContent, selectedText);
                 });
                 executorService.shutdown();

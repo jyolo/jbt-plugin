@@ -1,5 +1,3 @@
-package com.qianliuAiUi;
-
 import com.intellij.execution.Platform;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;

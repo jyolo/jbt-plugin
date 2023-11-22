@@ -1,4 +1,4 @@
-package com.qianliuAiUi.quickAsk;
+package quickAsk;
 
 
 import com.alibaba.fastjson2.JSON;

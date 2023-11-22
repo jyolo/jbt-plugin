@@ -1,4 +1,4 @@
-package com.qianliuAiUi.quickAsk;
+package quickAsk;
 
 import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.project.Project;

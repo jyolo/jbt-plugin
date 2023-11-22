@@ -1,4 +1,4 @@
-package com.qianliuAiUi.quickAsk;
+package quickAsk;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
@@ -8,7 +8,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.editor.VisualPosition;
 import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.obiscr.tabnine.general.EditorUtils;
+//import com.obiscr.tabnine.general.EditorUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -25,10 +25,10 @@ public class ShortCutAction extends com.intellij.openapi.actionSystem.AnAction {
         System.out.println("----------------tirgger quickAsk shortCutAction----------------0");
         // 手动触发
         Editor editor = FileEditorManager.getInstance(e.getProject()).getSelectedTextEditor();
-        if (editor == null || !EditorUtils.isMainEditor(editor)) {
-            System.out.println("----------------tirgger quickAsk shortCutAction----------------1");
-            return;
-        }
+//        if (editor == null || !EditorUtils.isMainEditor(editor)) {
+//            System.out.println("----------------tirgger quickAsk shortCutAction----------------1");
+//            return;
+//        }
         // 选中代码的结束部分光标位置
         SelectionModel selectionModel = editor.getSelectionModel();
         int selectionEnd = selectionModel.getSelectionEnd();
