@@ -1,4 +1,4 @@
-package com.obiscr.chatgpt.message;
+package com.common;
 
 import com.intellij.DynamicBundle;
 import org.jetbrains.annotations.Nls;
@@ -6,8 +6,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.function.Supplier;
 
 /**
@@ -16,7 +14,7 @@ import java.util.function.Supplier;
 public class ChatGPTBundle extends DynamicBundle {
 
     @NonNls
-    private static final String BUNDLE = "messages.ChatGPTBundle";
+    private static final String BUNDLE = "message.ChatGPTBundle";
     private static final ChatGPTBundle INSTANCE = new ChatGPTBundle();
 
     private ChatGPTBundle() {

@@ -1,5 +1,5 @@
 
-package com.obiscr.chatgpt.settings;
+package settings;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
@@ -8,10 +8,8 @@ import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.*;
 
-import static com.obiscr.chatgpt.MyToolWindowFactory.*;
 
 /**
  * @author Wuzi
@@ -53,11 +51,11 @@ public class OpenAISettingsState implements PersistentStateComponent<OpenAISetti
     public String optimizeInstructions = "";
     public String explainInstructions = "";
     public String findProblemsInstructions = "";
-    public Map<Integer,String> contentOrder = new HashMap<>(){{
-        put(1, CHATGPT_CONTENT_NAME);
-        put(2, GPT35_TRUBO_CONTENT_NAME);
-        put(3, ONLINE_CHATGPT_CONTENT_NAME);
-    }};
+//    public Map<Integer,String> contentOrder = new HashMap<>(){{
+//        put(1, CHATGPT_CONTENT_NAME);
+//        put(2, GPT35_TRUBO_CONTENT_NAME);
+//        put(3, ONLINE_CHATGPT_CONTENT_NAME);
+//    }};
 
     public Boolean enableLineWarp = true;
 

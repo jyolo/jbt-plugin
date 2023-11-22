@@ -9,7 +9,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectUtil;
 import com.intellij.openapi.util.ThrowableComputable;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.obiscr.tabnine.utils.CacheUtil;
+import com.common.CacheUtil;
 import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.io.BufferedReader;

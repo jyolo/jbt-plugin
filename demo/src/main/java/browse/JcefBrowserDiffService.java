@@ -1,4 +1,4 @@
-package com.qianliuAiUi;
+package browse;
 
 import com.intellij.execution.Platform;
 import com.intellij.openapi.application.ApplicationManager;
@@ -6,7 +6,7 @@ import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.registry.Registry;
 import com.intellij.ui.jcef.JBCefJSQuery;
-import com.qianliuAiUi.quickAsk.MyDialogDiff;
+import quickAsk.MyDialogDiff;
 import org.cef.browser.CefBrowser;
 import org.cef.browser.CefFrame;
 import org.cef.handler.CefLoadHandlerAdapter;

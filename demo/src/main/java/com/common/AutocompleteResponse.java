@@ -1,10 +1,9 @@
-package com.obiscr.tabnine.binary.requests.autocomplete;
+package com.common;
 
-import com.obiscr.tabnine.binary.BinaryResponse;
 
 import java.util.Arrays;
 
-public class AutocompleteResponse implements BinaryResponse {
+public class AutocompleteResponse  {
     public String old_prefix;
     public ResultEntry[] results;
     public String[] user_message;

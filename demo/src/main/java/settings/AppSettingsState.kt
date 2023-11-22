@@ -1,4 +1,4 @@
-package setting
+package settings
 
 import com.common.Env
 import com.intellij.openapi.application.ApplicationManager
@@ -6,10 +6,10 @@ import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.XmlSerializerUtil
-import com.obiscr.tabnine.Constants
-import com.obiscr.tabnine.inline.render.GraphicsUtils
 
-val settingsDefaultColor = GraphicsUtils.niceContrastColor.rgb
+//import com.obiscr.tabnine.inline.render.GraphicsUtils
+//
+//val settingsDefaultColor = GraphicsUtils.niceContrastColor.rgb
 
 /**
  * This package (`userSettings`) is heavily influenced by the docs from here:
@@ -56,19 +56,10 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState?> {
     var delayTime: Int = Constants.DELAY_TIME
     var shortcutKeys: String = Constants.SHORTCUTKEYS
 
-    private var colorState = settingsDefaultColor
+//    private var colorState = settingsDefaultColor
 
-    var disableLanguageTableElement: List<DisableLanguageTableElement> = ArrayList()
+//    var disableLanguageTableElement: List<DisableLanguageTableElement> = ArrayList()
 
-    var inlineHintColor: Int
-        get() = if (useDefaultColor) {
-            settingsDefaultColor
-        } else {
-            colorState
-        }
-        set(value) {
-            colorState = value
-        }
 
     override fun getState(): AppSettingsState {
         return this

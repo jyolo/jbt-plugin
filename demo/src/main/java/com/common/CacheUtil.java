@@ -1,6 +1,5 @@
-package com.obiscr.tabnine.utils;
+package com.common;
 
-import com.obiscr.tabnine.binary.requests.autocomplete.AutocompleteResponse;
 
 import java.util.ArrayList;
 import java.util.HashMap;

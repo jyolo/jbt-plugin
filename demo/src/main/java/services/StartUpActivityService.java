@@ -1,3 +1,6 @@
+package services;
+
+import browse.CustomProxyServlet;
 import browse.JcefBrowserService;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
@@ -6,10 +9,10 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.util.messages.MessageBus;
-import setting.AppSettingsState;
-import ideActions.editor.CloseDocumentListener;
-import com.qianliuAiUi.ideActions.editor.SchemeChangeListener;
-import com.qianliuAiUi.ideActions.editor.SelectDocumentListener;
+import settings.AppSettingsState;
+import ideActions.CloseDocumentListener;
+import ideActions.SchemeChangeListener;
+import ideActions.SelectDocumentListener;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -24,7 +27,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 
-public class StartUpActivity implements StartupActivity.DumbAware{
+public class StartUpActivityService implements StartupActivity.DumbAware{
 
     private Server server;
     private JcefBrowserService jcefBrowserService;

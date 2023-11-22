@@ -25,18 +25,18 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="千流AI" anchor="right" canCloseContents="true" icon="/icons/toolWindow.svg"
-                    factoryClass="com.qianliuAiUi.AiReviewWindowFactory" />
+<!--        <toolWindow id="千流AI" anchor="right" canCloseContents="true" icon="/icons/toolWindow.svg"-->
+<!--                    factoryClass="com.qianliuAiUi.AiReviewWindowFactory" />-->
 
         <notificationGroup id="webViewNotifications" displayType="BALLOON" toolWindowId="千流AI" />
 
-        <applicationConfigurable instance="com.obiscr.chatgpt.settings.QianLiuPanel" id="Qianliu-AI" parentId="tools" displayName="千流AI - 你的AI编程助手">
+        <applicationConfigurable instance="settings.QianLiuPanel" id="Qianliu-AI" parentId="tools" displayName="千流AI - 你的AI编程助手">
 <!--            <configurable instance="com.obiscr.chatgpt.settings.GPT3_35_TurboPanel" id="com.obiscr.chatgpt.settings.GPT3-3.5-Turbo" displayName="千流AI"/>-->
 <!--            <configurable instance="com.obiscr.tabnine.userSettings.ApplicationConfigurable" id="com.obiscr.tabnine.userSettings.ApplicationConfigurable" displayName="智能代码补全"/>-->
-            <configurable instance="setting.SettingsPanel" id="com.qianliuAiUi.settings.SettingsPanel" displayName="千流AI代码Review" />
+            <configurable instance="settings.SettingsPanel" id="com.qianliuAiUi.settings.SettingsPanel" displayName="千流AI代码Review" />
         </applicationConfigurable>
-<!--        <applicationService serviceImplementation="com.obiscr.chatgpt.settings.OpenAISettingsState"/>-->
-<!--        <applicationService serviceImplementation="com.obiscr.chatgpt.core.TokenManager"/>-->
+        <applicationService serviceImplementation="settings.OpenAISettingsState"/>
+        <applicationService serviceImplementation="com.common.RequestHeaders"/>
 <!--        <applicationService serviceImplementation="com.qianliuAiUi.settings.AiReviewSettingsState"/>-->
 <!--        <fileDocumentManagerListener implementation="com.qianliuAiUi.ideActions.editor.SaveDocumentListener"/>-->
 
@@ -44,11 +44,11 @@
 <!--        <projectService serviceImplementation="com.obiscr.chatgpt.core.SendAction"/>-->
 <!--        <projectService serviceImplementation="com.obiscr.chatgpt.ChatGPTHandler"/>-->
         <projectService serviceImplementation="browse.JcefBrowserService"/>
-<!--        <projectService serviceImplementation="com.qianliuAiUi.JcefBrowserDiffService"/>-->
+        <projectService serviceImplementation="browse.JcefBrowserDiffService"/>
 <!--        <projectService serviceImplementation="com.qianliuAiUi.EditorGutterIconService"/>-->
 <!--        <postStartupActivity implementation="com.common.ideStartUpActivity"/>-->
-<!--        <postStartupActivity implementation="com.obiscr.chatgpt.core.StartUpActivity"/>-->
-<!--        <postStartupActivity implementation="com.qianliuAiUi.StartUpActivity"/>-->
+<!--        <postStartupActivity implementation="com.obiscr.chatgpt.core.StartUpActivityService"/>-->
+<!--        <postStartupActivity implementation="com.qianliuAiUi.StartUpActivityService"/>-->
 <!--        <preloadingActivity implementation="com.obiscr.tabnine.Initializer"/>-->
 <!--        <preloadingActivity implementation="com.obiscr.tabnine.general.GettingStartedManager"/>-->
 <!--        <postStartupActivity implementation="com.obiscr.tabnine.Initializer"/>-->
@@ -66,7 +66,7 @@
 <!--        <editorActionHandler action="EditorEscape" implementationClass="com.obiscr.tabnine.inline.EscapeHandler" id="previewEscape" order="before hide-hints"/>-->
 <!--        <editorFactoryDocumentListener implementation="com.obiscr.tabnine.inline.TabnineDocumentListener"/>-->
 <!--        <editorFactoryDocumentListener implementation="com.obiscr.tabnine.inline.TabnineDocumentListener"/>-->
-<!--        <applicationService serviceImplementation="setting.AppSettingsState"/>-->
+        <applicationService serviceImplementation="settings.AppSettingsState"/>
 <!--        <fileType name="Tabnine project model file" implementationClass="com.obiscr.tabnine.TabnineProjectModelFileType" extensions="tabnine,.tabnine,tabnine.model,.tabnine.model,model,.model"/>-->
 <!--        <fileType name="Tabnine ignore file" implementationClass="com.obiscr.tabnine.TabnineIgnoreFileType" extensions="tabnineignore"/>-->
     </extensions>

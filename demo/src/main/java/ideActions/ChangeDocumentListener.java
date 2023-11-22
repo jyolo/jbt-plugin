@@ -1,9 +1,7 @@
 package ideActions;
 
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.event.DocumentEvent;
 import com.intellij.openapi.editor.event.DocumentListener;
-import com.obiscr.chatgpt.settings.OpenAISettingsState;
 
 
 public class ChangeDocumentListener implements DocumentListener {

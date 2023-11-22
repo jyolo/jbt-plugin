@@ -1,4 +1,4 @@
-package com.qianliuAiUi.ideActions.editor;
+package ideActions;
 
 import com.common.util;
 import com.intellij.openapi.editor.Document;
@@ -6,8 +6,8 @@ import com.intellij.openapi.fileEditor.FileDocumentManagerListener;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.qianliuAiUi.JsBridgeService;
-import com.qianliuAiUi.settings.AiReviewSettingsState;
+import browse.JsBridgeService;
+import settings.AiReviewSettingsState;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

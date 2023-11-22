@@ -1,4 +1,4 @@
-package com.qianliuAiUi;
+package services;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;

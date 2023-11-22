@@ -1,22 +1,9 @@
-package com.obiscr.tabnine.binary.requests.autocomplete;
+package com.common;
 
-import com.obiscr.tabnine.general.CompletionKind;
-import com.obiscr.tabnine.intellij.completions.Completion;
-
-public class ResultEntry implements Completion {
+public class ResultEntry  {
     public String new_prefix;
     public String old_suffix;
     public String new_suffix;
-    public CompletionMetadata completion_metadata;
-
-    @Override
-    public boolean isSnippet() {
-        if (this.completion_metadata == null) {
-            return false;
-        }
-
-        return this.completion_metadata.getCompletion_kind() == CompletionKind.Snippet;
-    }
 
     public String getNew_prefix() {
         return new_prefix;
@@ -42,13 +29,7 @@ public class ResultEntry implements Completion {
         this.new_suffix = new_suffix;
     }
 
-    public CompletionMetadata getCompletion_metadata() {
-        return completion_metadata;
-    }
 
-    public void setCompletion_metadata(CompletionMetadata completion_metadata) {
-        this.completion_metadata = completion_metadata;
-    }
 
     @Override
     public String toString() {
@@ -56,7 +37,6 @@ public class ResultEntry implements Completion {
                 "new_prefix='" + new_prefix + '\'' +
                 ", old_suffix='" + old_suffix + '\'' +
                 ", new_suffix='" + new_suffix + '\'' +
-                ", completion_metadata=" + completion_metadata +
                 '}';
     }
 }

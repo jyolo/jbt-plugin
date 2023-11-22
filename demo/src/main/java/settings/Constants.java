@@ -1,4 +1,4 @@
-package setting;
+package settings;
 
 import com.common.Env;
 import com.intellij.icons.AllIcons;
@@ -8,6 +8,7 @@ import javax.swing.*;
 
 public class Constants {
     public static final String PLUGIN_NAME = "QianLiuCopilot";
+    public static final String PLUGIN_ID = "11111";
     public static final int DEFAULT_MAX_TOKENS = 30;
     public static final int DEFAULT_MAX_LINES = 120;
     public static final int DELAY_TIME = 500;

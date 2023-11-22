@@ -1,4 +1,4 @@
-package setting;
+package settings;
 
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.options.Configurable;

@@ -1,32 +1,14 @@
-package com.obiscr.chatgpt.core;
+package com.common;
 
-import com.alibaba.fastjson2.JSON;
 import com.intellij.ide.plugins.PluginManager;
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.extensions.PluginId;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.ProjectManager;
-import com.obiscr.OpenAIAuth;
-import com.obiscr.OpenAIProxy;
-import com.obiscr.OpenAISession;
-
-import com.obiscr.chatgpt.message.ChatGPTBundle;
-import com.obiscr.chatgpt.settings.OpenAISettingsState;
-import com.obiscr.chatgpt.settings.SettingConfiguration;
-import com.obiscr.chatgpt.util.StringUtil;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import settings.Constants;
+import settings.OpenAISettingsState;
 
-import java.net.Proxy;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,15 +16,15 @@ import java.util.Map;
 /**
  * @author Wuzi
  */
-public class TokenManager {
-    private static final Logger LOG = LoggerFactory.getLogger(TokenManager.class);
+public class RequestHeaders {
+    private static final Logger LOG = LoggerFactory.getLogger(RequestHeaders.class);
     private final Map<String,String> headers = new HashMap<>();
     private OpenAISettingsState settings = OpenAISettingsState.getInstance();
-    public static TokenManager getInstance() {
-        return ApplicationManager.getApplication().getService(TokenManager.class);
+    public static RequestHeaders getInstance() {
+        return ApplicationManager.getApplication().getService(RequestHeaders.class);
     }
     private String ideName = ApplicationInfo.getInstance().getVersionName();
-    private String ideVersion = PluginManager.getPlugin(PluginId.getId(Constant.PLUGIN_ID)).getVersion();
+    private String ideVersion = PluginManager.getPlugin(PluginId.getId(Constants.PLUGIN_ID)).getVersion();
     private String ideRealVersion = ApplicationInfo.getInstance().getFullVersion() + "  " +
             ApplicationInfo.getInstance().getApiVersion();
 
@@ -65,83 +47,11 @@ public class TokenManager {
         OpenAISettingsState instance = OpenAISettingsState.getInstance();
         headers.put("api-key", instance.apiKey);
         headers.put("plugin-version", ideVersion);
-        headers.put("plugin-name", Constant.PLUGIN_NAME);
+        headers.put("plugin-name", Constants.PLUGIN_NAME);
         headers.put("ide", ideName);
         headers.put("ide-version", ideVersion);
         headers.put("ide-real-version", ideRealVersion);
         return headers;
-    }
-
-    public String refreshToken(String email, String password) {
-        String title = StringUtil.isNotEmpty(email) && StringUtil.isNotEmpty(password) ?
-                "OpenAI: Login" :
-                "OpenAI: Refresh Access Token";
-        String refreshStatus;
-        try {
-            refreshStatus =  ProgressManager.getInstance().run(new Task.WithResult<String, Exception>(
-                    ProjectManager.getInstance().getDefaultProject(),
-                    title, false) {
-                @Override
-                protected String compute(@NotNull ProgressIndicator indicator) {
-                    return doRefreshToken(email, password);
-                }
-            });
-        } catch (Exception e) {
-            LOG.error("ChatGPT: refreshToken failed, message: {}", e.getMessage());
-            refreshStatus = "Login or refresh token failed, please try it later. Use a proxy if necessary.";
-        }
-        return refreshStatus;
-    }
-
-    public void refreshTokenAsync() {
-        doRefreshToken(null,null);
-    }
-
-    public String doRefreshToken(String email, String password) {
-        if (StringUtil.isEmpty(email) || StringUtil.isEmpty(password)) {
-            if (StringUtil.isEmpty(settings.email) || StringUtil.isEmpty(settings.password)) {
-                Notifications.Bus.notify(
-                        new Notification(ChatGPTBundle.message("group.id"),
-                                "No login details provided!",
-                                "To refresh access token, the email and password are required, " +
-                                        "please configure it at first.",
-                                NotificationType.ERROR));
-                LOG.error("No login details provided! To refresh access token, the email and password are required, please configure it at first.");
-                return "No login details provided! To login or refresh access token, the email and password are required, please configure it at first.";
-            } else {
-                email = settings.email;
-                password = settings.password;
-            }
-        }
-        OpenAIAuth auth;
-        if (settings.enableProxy) {
-            Proxy.Type type = settings.proxyType ==
-                    SettingConfiguration.SettingProxyType.HTTP ? Proxy.Type.HTTP :
-                    settings.proxyType == SettingConfiguration.SettingProxyType.SOCKS ? Proxy.Type.SOCKS :
-                            Proxy.Type.DIRECT;
-            Proxy proxy = new OpenAIProxy(settings.proxyHostname, Integer.parseInt(settings.proxyPort),
-                    type).build();
-            auth = new OpenAIAuth(email, password, proxy);
-        } else {
-            auth = new OpenAIAuth(email, password);
-        }
-        try {
-            OpenAISession sessions = auth.auth();
-            settings.expireTime = sessions.getExpires();
-            settings.accessToken = sessions.getAccessToken();
-            String image = URLDecoder.decode(sessions.getUser().getImage(), StandardCharsets.UTF_8);
-            settings.imageUrl = image.substring(image.lastIndexOf("=") + 1);
-            LOG.info(JSON.toJSONString(sessions));
-            return "success";
-        } catch (Exception e) {
-            Notifications.Bus.notify(
-                    new Notification(ChatGPTBundle.message("group.id"),
-                            "Refresh access token failed",
-                            "Refresh access token failed, please try it later.",
-                            NotificationType.ERROR));
-            LOG.error("ChatGPT: Refresh access token failed, error = {}", e.getMessage());
-            return "Refresh access token failed, please try it later.";
-        }
     }
 
 }

@@ -3,12 +3,12 @@ package quickAsk;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.common.RequestHeaders;
 import com.common.util;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.obiscr.chatgpt.core.TokenManager;
-import setting.AppSettingsState;
+import settings.AppSettingsState;
 
 import javax.swing.*;
 import java.io.*;
@@ -48,7 +48,7 @@ public class MyDialogRequest {
             connection.setReadTimeout(maxConnectionTime);
             connection.setConnectTimeout(maxConnectionTime);
 
-            Map<String, String> headers = TokenManager.getInstance().getGPT35TurboHeaders();
+            Map<String, String> headers = RequestHeaders.getInstance().getGPT35TurboHeaders();
             headers.put("action", controllerAction);
             for (Map.Entry<String, String> entry : headers.entrySet()) {
                 connection.setRequestProperty(entry.getKey(), entry.getValue());

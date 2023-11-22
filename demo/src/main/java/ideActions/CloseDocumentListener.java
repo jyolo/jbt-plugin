@@ -8,8 +8,8 @@ import com.intellij.openapi.fileEditor.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.qianliuAiUi.EditorGutterIconService;
-import com.qianliuAiUi.JsBridgeService;
+import services.EditorGutterIconService;
+import browse.JsBridgeService;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

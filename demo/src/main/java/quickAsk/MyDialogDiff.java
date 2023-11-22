@@ -6,8 +6,7 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.wm.IdeFrame;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.ui.components.JBPanel;
-import com.qianliuAiUi.JcefBrowserDiffService;
-
+import browse.JcefBrowserDiffService;
 import javax.swing.*;
 import java.awt.*;
 

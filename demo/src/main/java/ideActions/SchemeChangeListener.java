@@ -6,13 +6,10 @@ import com.intellij.openapi.editor.colors.EditorColorsListener;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.wm.StatusBar;
-import com.intellij.openapi.wm.WindowManager;
-import com.qianliuAiUi.JsBridgeService;
-import com.qianliuAiUi.statusBar.AIReviewStatusBarWidget;
+import browse.JsBridgeService;
+//import com.qianliuAiUi.statusBar.AIReviewStatusBarWidget;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
 import java.util.Map;
 
 
@@ -25,9 +22,9 @@ public class SchemeChangeListener implements EditorColorsListener {
         Project project = ProjectManager.getInstance().getOpenProjects()[0];
 
         // 切换主题的时候 更新 AIReviewStatusBarWidget
-        StatusBar statusBar = WindowManager.getInstance().getStatusBar(project);
-        AIReviewStatusBarWidget widget = new AIReviewStatusBarWidget(project);
-        statusBar.updateWidget(widget.ID());
+//        StatusBar statusBar = WindowManager.getInstance().getStatusBar(project);
+//        AIReviewStatusBarWidget widget = new AIReviewStatusBarWidget(project);
+//        statusBar.updateWidget(widget.ID());
 
 
         new JsBridgeService(project).callActionFromIde("ide.changeTheme", params);

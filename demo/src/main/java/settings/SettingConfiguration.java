@@ -1,4 +1,4 @@
-package com.obiscr.chatgpt.settings;
+package settings;
 
 /**
  * @author Wuzi

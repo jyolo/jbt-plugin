@@ -1,4 +1,4 @@
-package com.obiscr.chatgpt.icons;
+package com.common;
 
 import com.intellij.openapi.util.IconLoader;
 

@@ -483,9 +483,6 @@ public class JcefBrowserService {
         };
     }
 
-    public CefRequestHandler requestHandler(){
-
-    }
     public CefLifeSpanHandler lifeSpanHandler(){
         return new CefLifeSpanHandler() {
             @Override

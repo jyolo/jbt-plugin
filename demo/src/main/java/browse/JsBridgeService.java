@@ -1,13 +1,12 @@
-package com.qianliuAiUi;
+package browse;
 
 import java.util.*;
 
-import browse.JcefBrowserService;
 import com.intellij.openapi.project.Project;
 import com.alibaba.fastjson2.JSONObject;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
-import com.qianliuAiUi.settings.AiReviewSettingsState;
+import settings.AiReviewSettingsState;
 import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.lang.reflect.Method;

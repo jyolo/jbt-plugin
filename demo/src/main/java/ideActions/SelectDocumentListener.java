@@ -7,16 +7,18 @@ import com.intellij.openapi.editor.event.SelectionListener;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.obiscr.chatgpt.settings.OpenAISettingsState;
-import com.qianliuAiUi.JsBridgeService;
+import settings.OpenAISettingsState;
+import browse.JsBridgeService;
 import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
 
-import static com.obiscr.chatgpt.ui.action.editor.AbstractEditorAction.*;
-
 public class SelectDocumentListener implements SelectionListener {
+    private static final String ACTION_ADD_TESTS = "add test";
+    private static final String ACTION_EXPLAIN = "explain";
+    private static final String ACTION_CONVERT = "convert";
+    private static final String ACTION_AI_REVIEW = "review";
     Project project;
 
     public SelectDocumentListener(Project project){
