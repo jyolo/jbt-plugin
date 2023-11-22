@@ -30,11 +30,11 @@
 
         <notificationGroup id="webViewNotifications" displayType="BALLOON" toolWindowId="千流AI" />
 
-<!--        <applicationConfigurable instance="com.obiscr.chatgpt.settings.QianLiuPanel" id="Qianliu-AI" parentId="tools" displayName="千流AI - 你的AI编程助手">-->
+        <applicationConfigurable instance="com.obiscr.chatgpt.settings.QianLiuPanel" id="Qianliu-AI" parentId="tools" displayName="千流AI - 你的AI编程助手">
 <!--            <configurable instance="com.obiscr.chatgpt.settings.GPT3_35_TurboPanel" id="com.obiscr.chatgpt.settings.GPT3-3.5-Turbo" displayName="千流AI"/>-->
 <!--            <configurable instance="com.obiscr.tabnine.userSettings.ApplicationConfigurable" id="com.obiscr.tabnine.userSettings.ApplicationConfigurable" displayName="智能代码补全"/>-->
-<!--            <configurable instance="com.qianliuAiUi.settings.SettingsPanel" id="com.qianliuAiUi.settings.SettingsPanel" displayName="千流AI代码Review" />-->
-<!--        </applicationConfigurable>-->
+            <configurable instance="setting.SettingsPanel" id="com.qianliuAiUi.settings.SettingsPanel" displayName="千流AI代码Review" />
+        </applicationConfigurable>
 <!--        <applicationService serviceImplementation="com.obiscr.chatgpt.settings.OpenAISettingsState"/>-->
 <!--        <applicationService serviceImplementation="com.obiscr.chatgpt.core.TokenManager"/>-->
 <!--        <applicationService serviceImplementation="com.qianliuAiUi.settings.AiReviewSettingsState"/>-->

@@ -1,8 +1,8 @@
 package com.qianliuAiUi.ideActions.editor;
 
-import com.intellij.openapi.fileEditor.FileDocumentManagerListener;
-import com.intellij.openapi.editor.Document;
 import com.common.util;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.fileEditor.FileDocumentManagerListener;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -10,14 +10,9 @@ import com.qianliuAiUi.JsBridgeService;
 import com.qianliuAiUi.settings.AiReviewSettingsState;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class SaveDocumentListener implements FileDocumentManagerListener {
 

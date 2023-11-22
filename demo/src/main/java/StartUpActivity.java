@@ -1,3 +1,4 @@
+import browse.JcefBrowserService;
 import com.intellij.execution.Platform;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
@@ -7,7 +8,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.util.messages.MessageBus;
 import com.obiscr.tabnine.userSettings.AppSettingsState;
-import com.qianliuAiUi.ideActions.editor.CloseDocumentListener;
+import ideActions.editor.CloseDocumentListener;
 import com.qianliuAiUi.ideActions.editor.SchemeChangeListener;
 import com.qianliuAiUi.ideActions.editor.SelectDocumentListener;
 import org.eclipse.jetty.server.Handler;

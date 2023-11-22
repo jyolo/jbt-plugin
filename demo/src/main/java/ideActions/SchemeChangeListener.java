@@ -1,4 +1,4 @@
-package com.qianliuAiUi.ideActions.editor;
+package ideActions;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.common.util;

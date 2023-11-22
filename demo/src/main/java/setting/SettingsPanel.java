@@ -1,4 +1,4 @@
-package com.qianliuAiUi.settings;
+package setting;
 
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.options.Configurable;

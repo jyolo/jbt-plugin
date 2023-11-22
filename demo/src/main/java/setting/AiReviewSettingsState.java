@@ -1,4 +1,4 @@
-package com.qianliuAiUi.settings;
+package setting;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
