@@ -5,10 +5,16 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.common.RequestHeaders;
 import com.common.util;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ModalityState;
+import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.editor.Caret;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import settings.AppSettingsState;
+import settings.Constants;
 
 import javax.swing.*;
 import java.io.*;
@@ -24,7 +30,8 @@ public class MyDialogRequest {
 
     public Project project;
     public MyDialogInput myDialogInput;
-
+    public Editor editor;
+    public Document document;
     public HttpURLConnection connection;
     public String controllerAction = "scribe";
     public Integer maxConnectionTime = (1000 * 60) * 3; // 三分钟兜底超时
@@ -33,6 +40,8 @@ public class MyDialogRequest {
     public MyDialogRequest(Project project, MyDialogInput myDialogInput){
         this.project = project;
         this.myDialogInput = myDialogInput;
+        this.editor = myDialogInput.editor;
+        this.document = editor.getDocument();
     }
 
     public void doRequest(Timer loadingTimer, String inputContent, String selectedText){
@@ -40,19 +49,24 @@ public class MyDialogRequest {
         StringBuilder response = new StringBuilder();
         int responseCode = 0;
         try {
-            AppSettingsState settings = AppSettingsState.getInstance();
-            String qianLiuServerUrl = settings.getQianLiuServerUrl();
-            String url = qianLiuServerUrl + "/api/v2/completion";
+
+            String url = Constants.SERVER_HOST + "/v1/completion";
             connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("POST");
             connection.setReadTimeout(maxConnectionTime);
             connection.setConnectTimeout(maxConnectionTime);
 
-            Map<String, String> headers = RequestHeaders.getInstance().getGPT35TurboHeaders();
+            Map<String, String> headers = RequestHeaders.getInstance().getRequestHeaders();
             headers.put("action", controllerAction);
+//            headers.put("service", "openai");
+//            headers.put("model", "llama-2-13b-chat.Q4_0.gguf");
+            headers.put("service", "openai");
+            headers.put("model", "gpt-3.5-turbo-instruct");
             for (Map.Entry<String, String> entry : headers.entrySet()) {
                 connection.setRequestProperty(entry.getKey(), entry.getValue());
             }
+
+            boolean stream = false;
 
             JSONObject params = new JSONObject();
             FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
@@ -65,13 +79,19 @@ public class MyDialogRequest {
             params.put("prompt", inputContent);
             params.put("custom_instructions", "");
             params.put("action", controllerAction);
-            params.put("stream", false);
+            params.put("stream", stream);
             java.util.List<String> collection_list = new ArrayList<>();
             collection_list.add("sase");
             collection_list.add("idux");
             params.put("collection_list", collection_list);
             params.put("is_carry_code", true);
             params.put("git_path", gitPath);
+
+//            OkHttpRequest request = new OkHttpRequest(url ,headers, params);
+//            request.getStreamResponse();
+//            ApacheHttpClientRequest request = new ApacheHttpClientRequest(url, headers, params);
+//            request.getStreamResponse();
+
             String requestBody = JSON.toJSONString(params);
             // 还未连接，进行连接操作
             connection.setDoOutput(true);
@@ -83,23 +103,48 @@ public class MyDialogRequest {
             responseCode = connection.getResponseCode();
             InputStream inputStream = responseCode == HttpURLConnection.HTTP_OK ? connection.getInputStream() : connection.getErrorStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
             String line;
             while ((line = reader.readLine()) != null) {
-                response.append(line);
+                if(stream){
+                    String streamLine = line;
+                    SwingUtilities.invokeLater(()->{
+                        streamWriteToDocument(streamLine);
+                    });
+                }else{
+                    response.append(line);
+                }
             }
             reader.close();
             inputStream.close();
             connection.disconnect();
 
-            if(response.toString().trim().equals("Unauthorized")){
-                JSONObject data = new JSONObject();
-                data.put("error_code", 100002);
-                afterRequestCallBack(data, true);
-            }else{
-                JSONObject responseJson = JSONObject.parseObject(response.toString());
-                afterRequestCallBack(responseJson, false);
-            }
+            JSONObject dict = JSONObject.parse(String.valueOf(response));
+            String text = dict.getString("data");
+            System.out.println(response);
+            System.out.println(text);
+            SwingUtilities.invokeLater(()->{
+                ApplicationManager.getApplication().invokeLaterOnWriteThread(() -> {
+                    // 获取当前光标位置
+                    Caret caret = editor.getCaretModel().getPrimaryCaret();
+                    int offset = caret.getOffset();
+                    // 在光标位置插入代码
+                    WriteCommandAction.runWriteCommandAction(project, () -> {
+                        document.insertString(offset, text);
+                        // 获取插入后的新光标位置
+                        int newOffset = offset + text.length();
+                        // 设置新光标位置
+                        caret.moveToOffset(newOffset);
+                    });
+                });
+            });
+//            if(response.toString().trim().equals("Unauthorized")){
+//                JSONObject data = new JSONObject();
+//                data.put("error_code", 100002);
+//                afterRequestCallBack(data, true);
+//            }else{
+//                JSONObject responseJson = JSONObject.parseObject(response.toString());
+//                afterRequestCallBack(responseJson, false);
+//            }
 
         }catch (SocketTimeoutException e) {
             // 处理连接超时错误
@@ -145,6 +190,28 @@ public class MyDialogRequest {
 
     }
 
+    public void streamWriteToDocument(String streamContent){
+        if (project != null && editor != null) {
+            JSONObject dict = JSONObject.parse(streamContent);
+            String text = dict.getString("data");
+            if(text == null){
+                return;
+            }
+            // 获取当前光标位置
+            Caret caret = editor.getCaretModel().getPrimaryCaret();
+            int offset = caret.getOffset();
+            ApplicationManager.getApplication().invokeLaterOnWriteThread(() -> {
+                // 在光标位置插入代码
+                WriteCommandAction.runWriteCommandAction(project, () -> {
+                    document.insertString(offset, text);
+                    // 获取插入后的新光标位置
+                    int newOffset = offset + text.length();
+                    // 设置新光标位置
+                    caret.moveToOffset(newOffset);
+                });
+            });
+        }
+    }
 
     public void afterRequestCallBack(JSONObject data, Boolean isErrorMsg){
         myDialogInput.afterRequestCallBack(data, isErrorMsg);

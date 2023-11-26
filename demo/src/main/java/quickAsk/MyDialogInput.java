@@ -48,7 +48,7 @@ class MyDialogInput extends DialogWrapper {
     private JButton cancelButton;
     private Timer loadingTimer;
     private JLabel bottonLabel;
-    private Editor editor;
+    public Editor editor;
     private JTextArea responseTextArea;
     private AnActionEvent event;
     public MyDialogRequest request;

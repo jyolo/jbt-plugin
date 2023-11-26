@@ -24,10 +24,9 @@ public class RequestHeaders {
         return ApplicationManager.getApplication().getService(RequestHeaders.class);
     }
     private String ideName = ApplicationInfo.getInstance().getVersionName();
-    private String ideVersion = PluginManager.getPlugin(PluginId.getId(Constants.PLUGIN_ID)).getVersion();
-    private String ideRealVersion = ApplicationInfo.getInstance().getFullVersion() + "  " +
-            ApplicationInfo.getInstance().getApiVersion();
-
+    private String pluginVersion = PluginManager.getPlugin(PluginId.getId(Constants.PLUGIN_ID)).getVersion();
+    private String ideVersion = ApplicationInfo.getInstance().getFullVersion();
+    private String ideFullVersion = ideVersion + "  " + ApplicationInfo.getInstance().getApiVersion();
     public Map<String, String> getChatGPTHeaders() {
         headers.put("Accept","text/event-stream");
         headers.put("Authorization","Bearer " + settings.accessToken);
@@ -40,17 +39,20 @@ public class RequestHeaders {
         return headers;
     }
 
-    public Map<String, String> getGPT35TurboHeaders() {
-//        headers.put("Authorization","Bearer " + settings.apiKey);
+    public Map<String, String> getRequestHeaders() {
+        headers.put("Authorization","Bearer " + settings.apiKey);
+//        headers.put("Accept","*/*");
         headers.put("Content-Type","application/json");
-        headers.put("User-Agent", ChatGPTBundle.message("system.setting.http.user_agent"));
+        headers.put("Connection","keep-alive");
+        headers.put("accept","*/*");
+        headers.put("User-Agent", "jbt-plugin");
         OpenAISettingsState instance = OpenAISettingsState.getInstance();
         headers.put("api-key", instance.apiKey);
-        headers.put("plugin-version", ideVersion);
+        headers.put("plugin-version", pluginVersion);
         headers.put("plugin-name", Constants.PLUGIN_NAME);
         headers.put("ide", ideName);
         headers.put("ide-version", ideVersion);
-        headers.put("ide-real-version", ideRealVersion);
+        headers.put("ide-full-version", ideFullVersion);
         return headers;
     }
 

@@ -18,7 +18,9 @@ dependencies{
     implementation("org.eclipse.jetty:jetty-webapp:9.4.49.v20220914")
 
     implementation("com.alibaba.fastjson2:fastjson2:2.0.17")
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.okhttp3:okhttp:4.9.2")
+    implementation("org.apache.httpcomponents:httpclient:4.5.13")
+
 }
 
 // Configure Gradle IntelliJ Plugin

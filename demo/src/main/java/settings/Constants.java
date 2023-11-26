@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class Constants {
     public static final String PLUGIN_NAME = "QianLiuCopilot";
-    public static final String PLUGIN_ID = "11111";
+    public static final String PLUGIN_ID = "ai-jbt";
     public static final int DEFAULT_MAX_TOKENS = 30;
     public static final int DEFAULT_MAX_LINES = 120;
     public static final int DELAY_TIME = 500;
@@ -25,6 +25,7 @@ public class Constants {
     public static final String SHORTCUTKEYS = "alt pressed A";
     public static final String SHORTCUTKEYS_TRIGGER = "manual";
     public static final String AUTO_TRIGGER = "auto";
+    public static final String SERVER_HOST = "http://127.0.0.1:8000";
     public static final Icon COPILOT_ICON = IconLoader.getIcon("/images/wx_pay.png", AllIcons.Icons.class);
     //    public static final String DEFAULT_SERVER_URL = "http://10.72.6.250:5000/v1/engines/codegen/completions";
     public static final String[]  CODE_COMPLETION_ALLOWABLE_LANGUAGES = {"vue", "typescript", "javascript", "python",
