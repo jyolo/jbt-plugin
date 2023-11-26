@@ -59,10 +59,10 @@ public class MyDialogRequest {
 
             Map<String, String> headers = RequestHeaders.getInstance().getRequestHeaders();
             headers.put("action", controllerAction);
+            headers.put("service", "llamacpp");
+            headers.put("model", "llama-2-13b-chat.Q4_0.gguf");
 //            headers.put("service", "openai");
-//            headers.put("model", "llama-2-13b-chat.Q4_0.gguf");
-            headers.put("service", "openai");
-            headers.put("model", "gpt-3.5-turbo-instruct");
+//            headers.put("model", "gpt-3.5-turbo-instruct");
             for (Map.Entry<String, String> entry : headers.entrySet()) {
                 connection.setRequestProperty(entry.getKey(), entry.getValue());
             }
