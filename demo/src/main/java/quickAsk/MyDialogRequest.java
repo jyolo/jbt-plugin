@@ -4,6 +4,7 @@ package quickAsk;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.common.RequestHeaders;
+import com.common.tools.TaskQueue;
 import com.common.util;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
@@ -66,7 +67,7 @@ public class MyDialogRequest {
                 connection.setRequestProperty(entry.getKey(), entry.getValue());
             }
 
-            boolean stream = false;
+            boolean stream = true;
 
             JSONObject params = new JSONObject();
             FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
@@ -87,11 +88,6 @@ public class MyDialogRequest {
             params.put("is_carry_code", true);
             params.put("git_path", gitPath);
 
-//            OkHttpRequest request = new OkHttpRequest(url ,headers, params);
-//            request.getStreamResponse();
-//            ApacheHttpClientRequest request = new ApacheHttpClientRequest(url, headers, params);
-//            request.getStreamResponse();
-
             String requestBody = JSON.toJSONString(params);
             // 还未连接，进行连接操作
             connection.setDoOutput(true);
@@ -104,12 +100,14 @@ public class MyDialogRequest {
             InputStream inputStream = responseCode == HttpURLConnection.HTTP_OK ? connection.getInputStream() : connection.getErrorStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
+            TaskQueue taskQueue = new TaskQueue();
             while ((line = reader.readLine()) != null) {
                 if(stream){
                     String streamLine = line;
-                    SwingUtilities.invokeLater(()->{
+                    taskQueue.addTask(()->{
                         streamWriteToDocument(streamLine);
                     });
+
                 }else{
                     response.append(line);
                 }
@@ -120,8 +118,6 @@ public class MyDialogRequest {
 
             JSONObject dict = JSONObject.parse(String.valueOf(response));
             String text = dict.getString("data");
-            System.out.println(response);
-            System.out.println(text);
             SwingUtilities.invokeLater(()->{
                 ApplicationManager.getApplication().invokeLaterOnWriteThread(() -> {
                     // 获取当前光标位置
@@ -197,17 +193,19 @@ public class MyDialogRequest {
             if(text == null){
                 return;
             }
-            // 获取当前光标位置
-            Caret caret = editor.getCaretModel().getPrimaryCaret();
-            int offset = caret.getOffset();
-            ApplicationManager.getApplication().invokeLaterOnWriteThread(() -> {
-                // 在光标位置插入代码
-                WriteCommandAction.runWriteCommandAction(project, () -> {
-                    document.insertString(offset, text);
-                    // 获取插入后的新光标位置
-                    int newOffset = offset + text.length();
-                    // 设置新光标位置
-                    caret.moveToOffset(newOffset);
+            SwingUtilities.invokeLater(()->{
+                ApplicationManager.getApplication().invokeLater(() -> {
+                    // 获取当前光标位置
+                    Caret caret = editor.getCaretModel().getPrimaryCaret();
+                    int offset = caret.getOffset();
+                    // 在光标位置插入代码
+                    WriteCommandAction.runWriteCommandAction(project, () -> {
+                        document.insertString(offset, text);
+                        // 获取插入后的新光标位置
+                        int newOffset = offset + text.length();
+                        // 设置新光标位置
+                        caret.moveToOffset(newOffset);
+                    });
                 });
             });
         }

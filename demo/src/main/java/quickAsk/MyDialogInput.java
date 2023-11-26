@@ -350,7 +350,6 @@ class MyDialogInput extends DialogWrapper {
             }else{
                 doCancelAction();
                 webviewParams.put("AICode", aiCode);
-
                 webviewParams.put("respId", respId);
                 AppSettingsState settings = AppSettingsState.getInstance();
                 String webviewProxyUrl = settings.getWebviewProxyUrl();
