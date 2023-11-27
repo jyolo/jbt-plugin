@@ -179,6 +179,13 @@ public class util {
             return "";
         }
     }
+
+    public static String wrapWithHtml(String content) {
+        return wrapWithHtmlTag(content, "html");
+    }
+    public static String wrapWithHtmlTag(String content, String tag) {
+        return "<" + tag + ">" + content + "</" + tag + ">";
+    }
 }
 
 

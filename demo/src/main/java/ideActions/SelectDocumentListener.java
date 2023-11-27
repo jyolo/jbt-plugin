@@ -2,16 +2,25 @@ package ideActions;
 
 
 import com.common.util;
+import com.intellij.ide.DataManager;
+import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ex.ActionUtil;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.SelectionEvent;
 import com.intellij.openapi.editor.event.SelectionListener;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.GotItTooltip;
 import settings.OpenAISettingsState;
 import browse.JsBridgeService;
 import org.jetbrains.annotations.NotNull;
+import toolTip.MyGotItToolTip;
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class SelectDocumentListener implements SelectionListener {
@@ -20,6 +29,7 @@ public class SelectDocumentListener implements SelectionListener {
     private static final String ACTION_CONVERT = "convert";
     private static final String ACTION_AI_REVIEW = "review";
     Project project;
+    Timer timer;
 
     public SelectDocumentListener(Project project){
         this.project = project;
@@ -80,7 +90,7 @@ public class SelectDocumentListener implements SelectionListener {
                     if(text == null){
                         return;
                     }
-                    GotItTooltip tooltip = new MyGotItToolTip(
+                    MyGotItToolTip tooltip = new MyGotItToolTip(
                             "",
                             "",
                             "",
@@ -90,7 +100,7 @@ public class SelectDocumentListener implements SelectionListener {
                                 AnAction action = actionManager.getAction(actionId);
                                 System.out.println(action);
                                 DataContext dataContext = DataManager.getInstance().getDataContext();
-                                ActionUtil.performActionDumbAware(action, new AnActionEvent(null, dataContext, ActionPlaces.UNKNOWN, new Presentation(), ActionManager.getInstance(), 0));
+                                ActionUtil.performActionDumbAwareWithCallbacks(action, new AnActionEvent(null, dataContext, ActionPlaces.UNKNOWN, new Presentation(), ActionManager.getInstance(), 0));
                             });
                     tooltip.show( editor );
 

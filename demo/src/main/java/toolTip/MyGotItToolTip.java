@@ -1,4 +1,4 @@
-package com.qianliuAiUi;
+package toolTip;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
@@ -9,17 +9,12 @@ import com.intellij.openapi.ui.popup.LightweightWindowEvent;
 import com.intellij.ui.JBColor;
 import com.intellij.ui.awt.RelativePoint;
 import com.intellij.util.ui.JBUI;
-import com.obiscr.tabnine.balloon.GotItTooltip;
-import com.obiscr.tabnine.balloon.GotItTooltipAction;
-import com.obiscr.tabnine.binary.BinaryRequestFacade;
-import com.obiscr.tabnine.binary.requests.notifications.shown.HintShownRequest;
 import org.jetbrains.annotations.NotNull;
-
 import javax.swing.*;
 
-import static com.obiscr.tabnine.general.DependencyContainer.instanceOfBinaryRequestFacade;
-import static com.obiscr.tabnine.general.Utils.wrapWithHtml;
-import static com.obiscr.tabnine.general.Utils.wrapWithHtmlTag;
+
+import static com.common.util.wrapWithHtml;
+import static com.common.util.wrapWithHtmlTag;
 
 public class MyGotItToolTip extends GotItTooltip{
     private final String tooltipId;
@@ -45,7 +40,6 @@ public class MyGotItToolTip extends GotItTooltip{
                 .invokeLater(
                         () -> {
                             this.isVisible = true;
-                            BinaryRequestFacade binaryRequestFacade = instanceOfBinaryRequestFacade();
                             JButton gotItButton = new JButton(buttonText);
                             tooltip = createBalloon(createTooltipContent(gotItButton, tooltipHeader, tooltipBody));
                             tooltip.setAnimationEnabled(false);
@@ -53,8 +47,9 @@ public class MyGotItToolTip extends GotItTooltip{
                                     new JBPopupListener() {
                                         @Override
                                         public void beforeShown(@NotNull LightweightWindowEvent event) {
-                                            binaryRequestFacade.executeRequest(
-                                                    new HintShownRequest(tooltipId, tooltipHeader, null, null));
+                                            System.out.println("beforeShown");
+//                                            binaryRequestFacade.executeRequest(
+//                                                    new HintShownRequest(tooltipId, tooltipHeader, null, null));
                                         }
                                     });
                             showTooltip(editor, tooltip);
