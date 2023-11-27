@@ -90,5 +90,40 @@
 <!--        <action class="com.obiscr.tabnine.inline.AcceptTabnineInlineCompletionAction" id="AcceptTabnineInlineCompletionAction" text="Accept Inline Completion">-->
 <!--            <keyboard-shortcut first-keystroke="TAB" keymap="$default"/>-->
 <!--        </action>-->
+        <group id="ChatGPT" text="Search with ChatGPT" description="Search with ChatGPT">
+            <group id="GenerateCodeGroup" class="com.obiscr.chatgpt.ui.action.editor.GenerateCodeGroup"
+                   icon="/icons/toolWindow.svg" popup="true" compact="true" text="千流AI：代码生成" >
+                <action id="addTestCode"  class="com.obiscr.chatgpt.ui.action.editor.GenerateAddDebugCode" />
+                <action id="addStrongerCode" class="com.obiscr.chatgpt.ui.action.editor.GenerateAddStrongerCode" />
+                <action id="AddComment" class="com.obiscr.chatgpt.ui.action.editor.GenerateAddComment" />
+                <action id="commonFunction" class="com.obiscr.chatgpt.ui.action.editor.GeneratePickCommonFunc" />
+                <action id="simplifyCode" class="com.obiscr.chatgpt.ui.action.editor.GenerateSimplifyCode" />
+            </group>
+            <action id="TestAction" class="com.obiscr.chatgpt.ui.action.editor.TestCaseAction"
+                    icon="/icons/toolWindow.svg"/>
+            <action id="qianliuAiUi" icon="/icons/toolWindow.svg"
+                    class="com.obiscr.chatgpt.ui.action.editor.AIReviewAction"/>
+            <action id="LanguageConvertAction" icon="/icons/toolWindow.svg"
+                    class="com.obiscr.chatgpt.ui.action.editor.LanguageConvertAction"/>
+            <!--            <action id="OptimizeAction" class="com.obiscr.chatgpt.ui.action.editor.OptimizeAction"-->
+            <!--                    icon="/icons/toolWindow.svg" />-->
+
+            <group id="QuickAskGroup" class="com.obiscr.chatgpt.ui.action.editor.AiAskGroup"
+                   icon="/icons/toolWindow.svg" popup="true" compact="true" text="千流AI：智能问答" >
+                <action id="QuickAsk" class="com.obiscr.chatgpt.ui.action.editor.AiChatAction"/>
+                <action id="ExplainAction" class="com.obiscr.chatgpt.ui.action.editor.ExplainAction"/>
+            </group>
+
+
+            <!--            <action id="WrongAction" icon="/icons/toolWindow.svg"-->
+            <!--                    class="com.obiscr.chatgpt.ui.action.editor.BugAction"/>-->
+            <!--      <action id="CustomAction" icon="/icons/toolWindow.svg"-->
+            <!--              class="com.obiscr.chatgpt.ui.action.editor.CustomAction">-->
+            <!--        <keyboard-shortcut keymap="$default" first-keystroke="control shift Q"/>-->
+            <!--      </action>-->
+            <separator/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <separator/>
+        </group>
     </actions>
 </idea-plugin>
