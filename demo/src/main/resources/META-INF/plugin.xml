@@ -91,7 +91,7 @@
 <!--            <keyboard-shortcut first-keystroke="TAB" keymap="$default"/>-->
 <!--        </action>-->
         <group id="ChatGPT" text="Search with ChatGPT" description="Search with ChatGPT">
-            <group id="GenerateCodeGroup" class="com.obiscr.chatgpt.ui.action.editor.GenerateCodeGroup"
+            <group id="GenerateCodeGroup" class="actionGroups.GenerateCodeGroup"
                    icon="/icons/toolWindow.svg" popup="true" compact="true" text="千流AI：代码生成" >
                 <action id="addTestCode"  class="com.obiscr.chatgpt.ui.action.editor.GenerateAddDebugCode" />
                 <action id="addStrongerCode" class="com.obiscr.chatgpt.ui.action.editor.GenerateAddStrongerCode" />
