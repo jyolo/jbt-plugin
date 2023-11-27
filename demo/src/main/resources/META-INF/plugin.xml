@@ -25,7 +25,7 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-<!--        <toolWindow id="千流AI" anchor="right" canCloseContents="true" icon="/icons/toolWindow.svg"-->
+<!--        <toolWindow id="千流AI" anchor="right" canCloseContents="true" icon="/icons/ai_coder_jetbrains_chatgpt_logo.svg"-->
 <!--                    factoryClass="com.qianliuAiUi.AiReviewWindowFactory" />-->
 
         <notificationGroup id="webViewNotifications" displayType="BALLOON" toolWindowId="千流AI" />
@@ -46,7 +46,7 @@
         <projectService serviceImplementation="browse.JcefBrowserService"/>
         <projectService serviceImplementation="browse.JcefBrowserDiffService"/>
 <!--        <projectService serviceImplementation="com.qianliuAiUi.EditorGutterIconService"/>-->
-<!--        <postStartupActivity implementation="com.common.ideStartUpActivity"/>-->
+        <postStartupActivity implementation="ideActions.StartUpActivity"/>
 <!--        <postStartupActivity implementation="com.obiscr.chatgpt.core.StartUpActivityService"/>-->
 <!--        <postStartupActivity implementation="com.qianliuAiUi.StartUpActivityService"/>-->
 <!--        <preloadingActivity implementation="com.obiscr.tabnine.Initializer"/>-->
@@ -92,33 +92,31 @@
 <!--        </action>-->
         <group id="ChatGPT" text="Search with ChatGPT" description="Search with ChatGPT">
             <group id="GenerateCodeGroup" class="actionGroups.GenerateCodeGroup"
-                   icon="/icons/toolWindow.svg" popup="true" compact="true" text="千流AI：代码生成" >
-                <action id="addTestCode"  class="com.obiscr.chatgpt.ui.action.editor.GenerateAddDebugCode" />
-                <action id="addStrongerCode" class="com.obiscr.chatgpt.ui.action.editor.GenerateAddStrongerCode" />
-                <action id="AddComment" class="com.obiscr.chatgpt.ui.action.editor.GenerateAddComment" />
-                <action id="commonFunction" class="com.obiscr.chatgpt.ui.action.editor.GeneratePickCommonFunc" />
-                <action id="simplifyCode" class="com.obiscr.chatgpt.ui.action.editor.GenerateSimplifyCode" />
+                   icon="/icons/ai_coder_jetbrains_chatgpt_logo.svg" popup="true" compact="true" text="千流AI：代码生成" >
+                <action id="addTestCode"  class="actionGroups.GenerateAddDebugCode" />
+                <action id="addStrongerCode" class="actionGroups.GenerateAddStrongerCode" />
+                <action id="AddComment" class="actionGroups.GenerateAddComment" />
+                <action id="commonFunction" class="actionGroups.GeneratePickCommonFunc" />
+                <action id="simplifyCode" class="actionGroups.GenerateSimplifyCode" />
             </group>
-            <action id="TestAction" class="com.obiscr.chatgpt.ui.action.editor.TestCaseAction"
-                    icon="/icons/toolWindow.svg"/>
-            <action id="qianliuAiUi" icon="/icons/toolWindow.svg"
-                    class="com.obiscr.chatgpt.ui.action.editor.AIReviewAction"/>
-            <action id="LanguageConvertAction" icon="/icons/toolWindow.svg"
-                    class="com.obiscr.chatgpt.ui.action.editor.LanguageConvertAction"/>
-            <!--            <action id="OptimizeAction" class="com.obiscr.chatgpt.ui.action.editor.OptimizeAction"-->
-            <!--                    icon="/icons/toolWindow.svg" />-->
+            <action id="TestAction" class="actionGroups.TestCaseAction"
+                    icon="/icons/ai_coder_jetbrains_chatgpt_logo.svg"/>
+            <action id="LanguageConvertAction" icon="/icons/ai_coder_jetbrains_chatgpt_logo.svg"
+                    class="actionGroups.LanguageConvertAction"/>
+                        <action id="OptimizeAction" class="actionGroups.OptimizeAction"
+                                icon="/icons/ai_coder_jetbrains_chatgpt_logo.svg" />
 
-            <group id="QuickAskGroup" class="com.obiscr.chatgpt.ui.action.editor.AiAskGroup"
-                   icon="/icons/toolWindow.svg" popup="true" compact="true" text="千流AI：智能问答" >
-                <action id="QuickAsk" class="com.obiscr.chatgpt.ui.action.editor.AiChatAction"/>
-                <action id="ExplainAction" class="com.obiscr.chatgpt.ui.action.editor.ExplainAction"/>
+            <group id="QuickAskGroup" class="actionGroups.AiAskGroup"
+                   icon="/icons/ai_coder_jetbrains_chatgpt_logo.svg" popup="true" compact="true" text="千流AI：智能问答" >
+                <action id="QuickAsk" class="actionGroups.AiChatAction"/>
+                <action id="ExplainAction" class="actionGroups.ExplainAction"/>
             </group>
 
 
-            <!--            <action id="WrongAction" icon="/icons/toolWindow.svg"-->
-            <!--                    class="com.obiscr.chatgpt.ui.action.editor.BugAction"/>-->
-            <!--      <action id="CustomAction" icon="/icons/toolWindow.svg"-->
-            <!--              class="com.obiscr.chatgpt.ui.action.editor.CustomAction">-->
+            <!--            <action id="WrongAction" icon="/icons/ai_coder_jetbrains_chatgpt_logo.svg"-->
+            <!--                    class="actionGroups.BugAction"/>-->
+            <!--      <action id="CustomAction" icon="/icons/ai_coder_jetbrains_chatgpt_logo.svg"-->
+            <!--              class="actionGroups.CustomAction">-->
             <!--        <keyboard-shortcut keymap="$default" first-keystroke="control shift Q"/>-->
             <!--      </action>-->
             <separator/>

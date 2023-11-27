@@ -1,8 +1,8 @@
-package com.obiscr.chatgpt.ui.action.editor;
+package actionGroups;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.obiscr.chatgpt.message.ChatGPTBundle;
-import com.obiscr.chatgpt.settings.OpenAISettingsState;
+import com.common.ChatGPTBundle;
+import settings.OpenAISettingsState;
 import org.jetbrains.annotations.NotNull;
 
 /**

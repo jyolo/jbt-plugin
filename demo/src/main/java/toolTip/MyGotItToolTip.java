@@ -51,6 +51,10 @@ public class MyGotItToolTip extends GotItTooltip{
 //                                            binaryRequestFacade.executeRequest(
 //                                                    new HintShownRequest(tooltipId, tooltipHeader, null, null));
                                         }
+                                        @Override
+                                        public void onClosed(@NotNull LightweightWindowEvent event){
+                                            System.out.println("closed");
+                                        }
                                     });
                             showTooltip(editor, tooltip);
                             gotItButton.addActionListener(e -> {

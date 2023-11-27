@@ -1,7 +1,7 @@
-package com.obiscr.chatgpt.ui.action.editor;
+package actionGroups;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.obiscr.chatgpt.message.ChatGPTBundle;
+import com.common.ChatGPTBundle;
 import org.jetbrains.annotations.NotNull;
 
 public class GeneratePickCommonFunc extends AbstractEditorAction {

@@ -1,4 +1,4 @@
-package com.obiscr.chatgpt.ui.action.editor;
+package actionGroups;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;

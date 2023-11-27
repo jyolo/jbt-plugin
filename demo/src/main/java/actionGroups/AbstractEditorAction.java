@@ -1,4 +1,4 @@
-package com.obiscr.chatgpt.ui.action.editor;
+package actionGroups;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -9,12 +9,11 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.util.NlsActions;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
-import com.obiscr.chatgpt.settings.OpenAISettingsState;
-import com.obiscr.chatgpt.util.StringUtil;
-import com.qianliuAiUi.EditorGutterIconService;
-import com.qianliuAiUi.StartUpActivity;
+import settings.OpenAISettingsState;
+import services.EditorGutterIconService;
+import ideActions.StartUpActivity;
 import org.jetbrains.annotations.NotNull;
-import com.qianliuAiUi.JsBridgeService;
+import browse.JsBridgeService;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;

@@ -11,7 +11,6 @@ import com.intellij.openapi.editor.event.SelectionListener;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.GotItTooltip;
 import settings.OpenAISettingsState;
 import browse.JsBridgeService;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +39,6 @@ public class SelectDocumentListener implements SelectionListener {
         String selectedText = event.getEditor().getSelectionModel().getSelectedText();
         if (selectedText == null){ return; }
 
-//        Map<String, String> params = new HashMap<>();
         Map<String, Object> params = new HashMap<>();
         FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
         VirtualFile virtualFile = fileEditorManager.getSelectedFiles()[0];

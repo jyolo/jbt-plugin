@@ -1,4 +1,4 @@
-package com.obiscr.chatgpt.ui.action.editor;
+package actionGroups;
 
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.Editor;

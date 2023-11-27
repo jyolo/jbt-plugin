@@ -1,6 +1,7 @@
-package com.qianliuAiUi;
+package ideActions;
 
-import com.intellij.execution.Platform;
+import browse.CustomProxyServlet;
+import browse.JcefBrowserService;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
@@ -8,10 +9,6 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.util.messages.MessageBus;
-import com.obiscr.tabnine.userSettings.AppSettingsState;
-import com.qianliuAiUi.ideActions.editor.CloseDocumentListener;
-import com.qianliuAiUi.ideActions.editor.SchemeChangeListener;
-import com.qianliuAiUi.ideActions.editor.SelectDocumentListener;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -21,20 +18,16 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.Resource;
 import org.jetbrains.annotations.NotNull;
+import settings.AppSettingsState;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 
 public class StartUpActivity implements StartupActivity.DumbAware{
 
     private Server server;
     private JcefBrowserService jcefBrowserService;
-
-
 
     @Override
     public void runActivity(@NotNull Project project) {
@@ -93,7 +86,7 @@ public class StartUpActivity implements StartupActivity.DumbAware{
             // 设置静态资源目录
             ResourceHandler resourceHandler = new ResourceHandler();
             Resource resource = Resource.newClassPathResource("/html");
-            if(resource =if(resource == null){
+            if(resource == null){
                 resource = Resource.newResource(getClass().getClassLoader().getResource("html/"));
             }
             resourceHandler.setBaseResource(resource);
