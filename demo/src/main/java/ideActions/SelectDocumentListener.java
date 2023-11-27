@@ -40,6 +40,12 @@ public class SelectDocumentListener implements SelectionListener {
         params.put("language", language);
         params.put("filePath", filePath);
 
+        try{
+            addSelectTextToolTips(event);
+        }catch (Exception e){
+            System.out.println("触发选中悬浮提示框失败：" + e.toString());
+        }
+
         OpenAISettingsState setting = OpenAISettingsState.getInstance();
         Map<String, String> customInstructionMap = new HashMap<>();
 //        customInstructionMap.put(ACTION_OPTIMIZE, setting.optimizeInstructions);
@@ -52,6 +58,53 @@ public class SelectDocumentListener implements SelectionListener {
         new JsBridgeService(project).callActionFromIde("editor.selectCode", params);
 
     }
+
+    public void addSelectTextToolTips(SelectionEvent event){
+        Editor editor = event.getEditor();
+        if (timer != null) {
+            timer.cancel();
+            System.out.println("定时器已存在");
+            timer = null;
+        }
+
+        // 创建定时器
+        timer = new Timer();
+        // 创建定时任务
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                timer = null;
+                SwingUtilities.invokeLater(() -> {
+                    // 在这里编写需要延迟执行的任务
+                    String text = editor.getSelectionModel().getSelectedText();
+                    if(text == null){
+                        return;
+                    }
+                    GotItTooltip tooltip = new MyGotItToolTip(
+                            "",
+                            "",
+                            "",
+                            () -> {
+                                ActionManager actionManager = ActionManager.getInstance();
+                                String actionId = "quickAskShortCutAction";
+                                AnAction action = actionManager.getAction(actionId);
+                                System.out.println(action);
+                                DataContext dataContext = DataManager.getInstance().getDataContext();
+                                ActionUtil.performActionDumbAware(action, new AnActionEvent(null, dataContext, ActionPlaces.UNKNOWN, new Presentation(), ActionManager.getInstance(), 0));
+                            });
+                    tooltip.show( editor );
+
+                });
+
+
+            }
+        };
+
+        // 延迟1秒后执行任务
+        timer.schedule(task, 1000);
+
+    }
+
 
 
 }
