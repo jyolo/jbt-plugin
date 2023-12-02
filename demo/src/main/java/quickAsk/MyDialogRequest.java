@@ -117,6 +117,11 @@ public class MyDialogRequest {
             connection.disconnect();
 
             JSONObject dict = JSONObject.parse(String.valueOf(response));
+            if(dict == null){
+               System.out.println(responseCode);
+               System.out.println(response);
+               return;
+            }
             String text = dict.getString("data");
             SwingUtilities.invokeLater(()->{
                 ApplicationManager.getApplication().invokeLaterOnWriteThread(() -> {
@@ -169,6 +174,7 @@ public class MyDialogRequest {
                 afterRequestCallBack(data, false);
             }
         }catch (Exception e){
+            e.printStackTrace();
             System.out.println("链接断开:----Exception----" + responseCode);
             if(responseCode >= 500){
                 JSONObject data = new JSONObject();
@@ -187,8 +193,19 @@ public class MyDialogRequest {
     }
 
     public void streamWriteToDocument(String streamContent){
-        if (project != null && editor != null) {
-            JSONObject dict = JSONObject.parse(streamContent);
+        if (project != null && editor != null && streamContent != null) {
+            JSONObject dict = null;
+            try{
+                dict = JSONObject.parse(streamContent);
+            } catch (Exception e){
+                dict = null;
+            }
+            if(dict == null){
+                System.out.println("++++++++++++");
+                System.out.println(streamContent);
+                System.out.println("++++++++++++");
+                return;
+            }
             String text = dict.getString("data");
             if(text == null){
                 return;

@@ -41,10 +41,9 @@ public class RequestHeaders {
 
     public Map<String, String> getRequestHeaders() {
         headers.put("Authorization","Bearer " + settings.apiKey);
-//        headers.put("Accept","*/*");
+        headers.put("Accept","*");
         headers.put("Content-Type","application/json");
         headers.put("Connection","keep-alive");
-        headers.put("accept","*/*");
         headers.put("User-Agent", "jbt-plugin");
         OpenAISettingsState instance = OpenAISettingsState.getInstance();
         headers.put("api-key", instance.apiKey);
