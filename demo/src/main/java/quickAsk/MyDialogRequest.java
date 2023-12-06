@@ -4,6 +4,7 @@ package quickAsk;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.common.RequestHeaders;
+import com.common.tools.OkHttpRequest;
 import com.common.tools.TaskQueue;
 import com.common.util;
 import com.intellij.openapi.application.ApplicationManager;
@@ -24,6 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -49,26 +51,9 @@ public class MyDialogRequest {
         System.out.println("quickAsk start request--------");
         StringBuilder response = new StringBuilder();
         int responseCode = 0;
+        String url = Constants.SERVER_HOST + "/v1/completion";
+        Boolean stream = true;
         try {
-
-            String url = Constants.SERVER_HOST + "/v1/completion";
-            connection = (HttpURLConnection) new URL(url).openConnection();
-            connection.setRequestMethod("POST");
-            connection.setReadTimeout(maxConnectionTime);
-            connection.setConnectTimeout(maxConnectionTime);
-
-            Map<String, String> headers = RequestHeaders.getInstance().getRequestHeaders();
-            headers.put("action", controllerAction);
-            headers.put("service", "llamacpp");
-            headers.put("model", "llama-2-13b-chat.Q4_0.gguf");
-//            headers.put("service", "openai");
-//            headers.put("model", "gpt-3.5-turbo-instruct");
-            for (Map.Entry<String, String> entry : headers.entrySet()) {
-                connection.setRequestProperty(entry.getKey(), entry.getValue());
-            }
-
-            boolean stream = true;
-
             JSONObject params = new JSONObject();
             FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
             VirtualFile virtualFile = fileEditorManager.getSelectedFiles()[0];
@@ -89,55 +74,84 @@ public class MyDialogRequest {
             params.put("git_path", gitPath);
 
             String requestBody = JSON.toJSONString(params);
+
+            connection = (HttpURLConnection) new URL(url).openConnection();
+            connection.setRequestMethod("POST");
+            connection.setReadTimeout(maxConnectionTime);
+            connection.setConnectTimeout(maxConnectionTime);
+
+            Map<String, String> headers = RequestHeaders.getInstance().getRequestHeaders();
+            headers.put("action", controllerAction);
+            headers.put("service", "llamacpp");
+            headers.put("model", "llama-2-13b-chat.Q4_0.gguf");
+//            headers.put("service", "openai");
+//            headers.put("model", "gpt-3.5-turbo-instruct");
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                connection.setRequestProperty(entry.getKey(), entry.getValue());
+            }
             // 还未连接，进行连接操作
             connection.setDoOutput(true);
-            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            wr.writeChars(requestBody);
-            wr.flush();
-            wr.close();
-            // 获取响应
-            responseCode = connection.getResponseCode();
-            InputStream inputStream = responseCode == HttpURLConnection.HTTP_OK ? connection.getInputStream() : connection.getErrorStream();
+            try (
+                OutputStream os = connection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"))
+            ) {
+                writer.write(requestBody);
+                writer.flush();
+                System.out.println("Request sent successfully111");
+            }
+            System.out.println("Request sent successfully222");
+            // 获取响应流
+            InputStream inputStream = connection.getInputStream();
+            System.out.println("Request sent successfully3333");
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
             TaskQueue taskQueue = new TaskQueue();
+            System.out.println("Request sent successfully444");
             while ((line = reader.readLine()) != null) {
                 if(stream){
                     String streamLine = line;
                     taskQueue.addTask(()->{
                         streamWriteToDocument(streamLine);
                     });
-
                 }else{
                     response.append(line);
                 }
             }
-            reader.close();
-            inputStream.close();
-            connection.disconnect();
 
-            JSONObject dict = JSONObject.parse(String.valueOf(response));
-            if(dict == null){
-               System.out.println(responseCode);
-               System.out.println(response);
-               return;
+            // 获取响应
+            responseCode = connection.getResponseCode();
+            System.out.println(responseCode);
+            if(HttpURLConnection.HTTP_OK != 200){
+                inputStream = connection.getErrorStream();
             }
-            String text = dict.getString("data");
-            SwingUtilities.invokeLater(()->{
-                ApplicationManager.getApplication().invokeLaterOnWriteThread(() -> {
-                    // 获取当前光标位置
-                    Caret caret = editor.getCaretModel().getPrimaryCaret();
-                    int offset = caret.getOffset();
-                    // 在光标位置插入代码
-                    WriteCommandAction.runWriteCommandAction(project, () -> {
-                        document.insertString(offset, text);
-                        // 获取插入后的新光标位置
-                        int newOffset = offset + text.length();
-                        // 设置新光标位置
-                        caret.moveToOffset(newOffset);
-                    });
-                });
-            });
+
+
+//            reader.close();
+//            inputStream.close();
+//            connection.disconnect();
+//
+//            JSONObject dict = JSONObject.parse(String.valueOf(response));
+//            if(dict == null){
+//               System.out.println(responseCode);
+//               System.out.println(response);
+//               return;
+//            }
+//            String text = dict.getString("data");
+//            SwingUtilities.invokeLater(()->{
+//                ApplicationManager.getApplication().invokeLaterOnWriteThread(() -> {
+//                    // 获取当前光标位置
+//                    Caret caret = editor.getCaretModel().getPrimaryCaret();
+//                    int offset = caret.getOffset();
+//                    // 在光标位置插入代码
+//                    WriteCommandAction.runWriteCommandAction(project, () -> {
+//                        document.insertString(offset, text);
+//                        // 获取插入后的新光标位置
+//                        int newOffset = offset + text.length();
+//                        // 设置新光标位置
+//                        caret.moveToOffset(newOffset);
+//                    });
+//                });
+//            });
 //            if(response.toString().trim().equals("Unauthorized")){
 //                JSONObject data = new JSONObject();
 //                data.put("error_code", 100002);
@@ -201,9 +215,6 @@ public class MyDialogRequest {
                 dict = null;
             }
             if(dict == null){
-                System.out.println("++++++++++++");
-                System.out.println(streamContent);
-                System.out.println("++++++++++++");
                 return;
             }
             String text = dict.getString("data");

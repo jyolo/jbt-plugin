@@ -3,19 +3,26 @@ package com.common.tools;
 import com.alibaba.fastjson2.JSONObject;
 import okhttp3.*;
 import okio.BufferedSource;
+import okio.Timeout;
 
 import java.io.*;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class OkHttpRequest {
     private OkHttpClient client;
     private String requestUrl;
     private RequestBody requestBody;
     private Map<String, String> requestHeaders;
+    Integer TimeOut = 3000;
 
     public OkHttpRequest(String requestUrl, Map<String, String> requestHeaders, Map<String, Object> requestData) {
-        this.client = new OkHttpClient();
+        this.client = new OkHttpClient.Builder()
+                .callTimeout(TimeOut, TimeUnit.SECONDS)  // 设置超时时间
+                .connectTimeout(TimeOut, TimeUnit.SECONDS)  // 设置超时时间
+                .readTimeout(TimeOut, TimeUnit.SECONDS)  // 设置超时时间
+                .build();
         this.requestUrl = requestUrl;
         this.requestBody = makeRequestJsonBody(requestData);
 //        makeRequest(requestHeaders);
@@ -72,16 +79,31 @@ public class OkHttpRequest {
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-                // 获取字符流
-                Reader source = response.body().charStream();
-                // 使用 BufferedReader 逐行读取
-                try (BufferedReader reader = new BufferedReader(source)) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        System.out.println(line);
-                    }
+                String line;
+                while ((line = response.body().source().readUtf8Line()) != null) {
+                    System.out.println(line);
+//                    if (line.equals("data: [DONE]")) {
+//                        System.out.println("\n[DONE]");
+//                        break;
+//                    } else if (line.startsWith("data: ")) {
+//                        line = line.substring(6);
+//                        JSONObject responseJson = new JSONObject(line);
+//                        if (responseJson.getJSONArray("choices").getJSONObject(0).getJSONObject("delta").has("content")) {
+//                            System.out.print(responseJson.getJSONArray("choices").getJSONObject(0).getJSONObject("delta").getString("content"));
+//                        }
+//                    }
                 }
-                source.close();
+
+//                // 获取字符流
+//                Reader source = response.body().charStream();
+//                // 使用 BufferedReader 逐行读取
+//                try (BufferedReader reader = new BufferedReader(source)) {
+//                    String line;
+//                    while ((line = reader.readLine()) != null) {
+//                        System.out.println(line);
+//                    }
+//                }
+
             } else {
                 System.out.println("Request failed: " + response.code() + ", " + response.message());
             }

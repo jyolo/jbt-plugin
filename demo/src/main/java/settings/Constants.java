@@ -25,8 +25,8 @@ public class Constants {
     public static final String SHORTCUTKEYS = "alt pressed A";
     public static final String SHORTCUTKEYS_TRIGGER = "manual";
     public static final String AUTO_TRIGGER = "auto";
-    public static final String SERVER_HOST = "http://127.0.0.1:8000";
-//    public static final String SERVER_HOST = "http://100.68.73.62:8000";
+//    public static final String SERVER_HOST = "http://127.0.0.1:8000";
+    public static final String SERVER_HOST = "http://100.68.67.126:8000";
 
     public static final Icon ICON = IconLoader.getIcon("/icons/qianliu-icon.png", AllIcons.Icons.class);
     public static final Icon COPILOT_ICON = IconLoader.getIcon("/images/wx_pay.png", AllIcons.Icons.class);
