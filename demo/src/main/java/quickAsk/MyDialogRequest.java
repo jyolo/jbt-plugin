@@ -235,6 +235,7 @@ public class MyDialogRequest {
                         caret.moveToOffset(newOffset);
                     });
                 });
+
             });
         }
     }
