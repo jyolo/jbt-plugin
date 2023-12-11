@@ -82,10 +82,10 @@ public class MyDialogRequest {
 
             Map<String, String> headers = RequestHeaders.getInstance().getRequestHeaders();
             headers.put("action", controllerAction);
-            headers.put("service", "llamacpp");
-            headers.put("model", "llama-2-13b-chat.Q4_0.gguf");
-//            headers.put("service", "openai");
-//            headers.put("model", "gpt-3.5-turbo-instruct");
+//            headers.put("service", "llamacpp");
+//            headers.put("model", "llama-2-13b-chat.Q4_0.gguf");
+            headers.put("service", "openai");
+            headers.put("model", "gpt-3.5-turbo-instruct");
             for (Map.Entry<String, String> entry : headers.entrySet()) {
                 connection.setRequestProperty(entry.getKey(), entry.getValue());
             }
@@ -110,6 +110,7 @@ public class MyDialogRequest {
             while ((line = reader.readLine()) != null) {
                 if(stream){
                     String streamLine = line;
+                    System.out.println(streamLine);
                     taskQueue.addTask(()->{
                         streamWriteToDocument(streamLine);
                     });
@@ -125,17 +126,16 @@ public class MyDialogRequest {
                 inputStream = connection.getErrorStream();
             }
 
+            reader.close();
+            inputStream.close();
+            connection.disconnect();
 
-//            reader.close();
-//            inputStream.close();
-//            connection.disconnect();
-//
-//            JSONObject dict = JSONObject.parse(String.valueOf(response));
-//            if(dict == null){
-//               System.out.println(responseCode);
-//               System.out.println(response);
-//               return;
-//            }
+            JSONObject dict = JSONObject.parse(String.valueOf(response));
+            if(dict == null){
+               System.out.println(responseCode);
+               System.out.println(response);
+               return;
+            }
 //            String text = dict.getString("data");
 //            SwingUtilities.invokeLater(()->{
 //                ApplicationManager.getApplication().invokeLaterOnWriteThread(() -> {

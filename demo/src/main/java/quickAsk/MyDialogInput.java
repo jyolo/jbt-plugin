@@ -349,21 +349,21 @@ class MyDialogInput extends DialogWrapper {
                 showResponseTextByNoCode(content, isErrorMsg);
             }else{
                 doCancelAction();
-                webviewParams.put("AICode", aiCode);
-                webviewParams.put("respId", respId);
-                AppSettingsState settings = AppSettingsState.getInstance();
-                String webviewProxyUrl = settings.getWebviewProxyUrl();
-                // 将端口替换成当前的随机端口
-                JcefBrowserService jcefBrowserService = JcefBrowserService.getInstance(project);
-                webviewProxyUrl = webviewProxyUrl.replace("{port}", jcefBrowserService.serverPort.toString());
+//                webviewParams.put("AICode", aiCode);
+//                webviewParams.put("respId", respId);
+//                AppSettingsState settings = AppSettingsState.getInstance();
+//                String webviewProxyUrl = settings.getWebviewProxyUrl();
+//                // 将端口替换成当前的随机端口
+//                JcefBrowserService jcefBrowserService = JcefBrowserService.getInstance(project);
+//                webviewProxyUrl = webviewProxyUrl.replace("{port}", jcefBrowserService.serverPort.toString());
+//
+//                webviewParams.put("token", instance.apiKey);
+//                webviewParams.put("baseUrl", webviewProxyUrl);
 
-                webviewParams.put("token", instance.apiKey);
-                webviewParams.put("baseUrl", webviewProxyUrl);
-
-                JcefBrowserDiffService jcefBrowserDiffService = JcefBrowserDiffService.getInstance(project);
-                jcefBrowserDiffService.setProject(project);
-                jcefBrowserDiffService.setServerPort(JcefBrowserService.getInstance(project).getServerPort());
-                jcefBrowserDiffService.showBrowser(webviewParams);
+//                JcefBrowserDiffService jcefBrowserDiffService = JcefBrowserDiffService.getInstance(project);
+//                jcefBrowserDiffService.setProject(project);
+//                jcefBrowserDiffService.setServerPort(JcefBrowserService.getInstance(project).getServerPort());
+//                jcefBrowserDiffService.showBrowser(webviewParams);
             }
 
 
