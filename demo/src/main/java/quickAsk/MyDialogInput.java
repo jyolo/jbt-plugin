@@ -1,6 +1,5 @@
 package quickAsk;
 
-import browse.JcefBrowserService;
 import com.alibaba.fastjson2.JSONObject;
 import com.common.util;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -13,8 +12,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.util.ui.UIUtil;
 import settings.OpenAISettingsState;
-import settings.AppSettingsState;
-import browse.JcefBrowserDiffService;
 //import com.qianliuAiUi.JcefBrowserService;
 import org.jetbrains.annotations.NotNull;
 

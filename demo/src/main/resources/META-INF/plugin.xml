@@ -39,7 +39,6 @@
         <applicationService serviceImplementation="com.common.RequestHeaders"/>
         <applicationService serviceImplementation="settings.AiReviewSettingsState"/>
         <fileDocumentManagerListener implementation="ideActions.SaveDocumentListener"/>
-        <completion.contributor language="any" implementationClass="compltion.TabNineCompletionContributor" order="first"/>
 
 <!--        <projectService serviceImplementation="com.obiscr.chatgpt.core.ConversationManager"/>-->
 <!--        <projectService serviceImplementation="com.obiscr.chatgpt.core.SendAction"/>-->
@@ -56,7 +55,7 @@
 <!--        <statusBarWidgetProvider implementation="com.qianliuAiUi.statusBar.StatusBarProvider"/>-->
 <!--        <statusBarWidgetProvider implementation="com.obiscr.tabnine.statusBar.StatusBarProvider"/>-->
 <!--        &lt;!&ndash;        <statusBarWidgetProvider implementation="com.tabnine.statusBar.StatusBarPromotionProvider"/>&ndash;&gt;-->
-<!--        <completion.contributor language="any" implementationClass="com.obiscr.tabnine.intellij.completions.TabNineCompletionContributor" order="first"/>-->
+        <completion.contributor language="any" implementationClass="com.tabnine.intellij.completions.TabNineCompletionContributor" order="first"/>
 
 <!--        <applicationService serviceImplementation="com.obiscr.tabnine.lifecycle.BinaryStateService"/>-->
 <!--        <applicationService serviceImplementation="com.obiscr.tabnine.capabilities.CapabilitiesService"/>-->

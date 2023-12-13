@@ -1,8 +1,6 @@
 package actionGroups;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.psi.PsiFile;
 import com.common.ChatGPTBundle;
 import settings.OpenAISettingsState;
 import org.jetbrains.annotations.NotNull;

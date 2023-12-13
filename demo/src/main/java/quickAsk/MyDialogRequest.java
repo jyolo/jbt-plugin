@@ -4,11 +4,9 @@ package quickAsk;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.common.RequestHeaders;
-import com.common.tools.OkHttpRequest;
-import com.common.tools.TaskQueue;
+import com.tools.TaskQueue;
 import com.common.util;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Document;
@@ -25,7 +23,6 @@ import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 
