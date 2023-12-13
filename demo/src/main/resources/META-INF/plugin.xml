@@ -75,6 +75,9 @@
         <action class="quickAsk.ShortCutAction" id="quickAskShortCutAction" text="qianliuAiUiQuickAsk" >
             <keyboard-shortcut first-keystroke="alt pressed I" keymap="$default" replace-all="true"/>
         </action>
+        <action class="compltion.MyCompletionActions" id="MyCompeltionAction" text="manual Completion">
+            <keyboard-shortcut first-keystroke="alt pressed A" keymap="$default"/>
+        </action>
 <!--        <action class="com.obiscr.tabnine.CompltionActions" id="CompeltionAction" text="manual Completion">-->
 <!--            <keyboard-shortcut first-keystroke="alt pressed A" keymap="$default"/>-->
 <!--        </action>-->
