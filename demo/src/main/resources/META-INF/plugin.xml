@@ -39,6 +39,7 @@
         <applicationService serviceImplementation="com.common.RequestHeaders"/>
         <applicationService serviceImplementation="settings.AiReviewSettingsState"/>
         <fileDocumentManagerListener implementation="ideActions.SaveDocumentListener"/>
+        <completion.contributor language="any" implementationClass="compltion.TabNineCompletionContributor" order="first"/>
 
 <!--        <projectService serviceImplementation="com.obiscr.chatgpt.core.ConversationManager"/>-->
 <!--        <projectService serviceImplementation="com.obiscr.chatgpt.core.SendAction"/>-->
