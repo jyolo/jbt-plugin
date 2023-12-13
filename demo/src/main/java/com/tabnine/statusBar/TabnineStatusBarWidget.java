@@ -64,10 +64,10 @@ public class TabnineStatusBarWidget extends EditorBasedWidget
         .connect(this)
         .subscribe(
             LimitedSecletionsChangedNotifier.LIMITED_SELECTIONS_CHANGED_TOPIC,
-            limited -> {
-              this.isLimited = limited;
-              update();
-            });
+                (LimitedSecletionsChangedNotifier) limited -> {
+                  this.isLimited = limited;
+                  update();
+                });
 
     CapabilitiesStateSingleton.getInstance()
         .onChange(
