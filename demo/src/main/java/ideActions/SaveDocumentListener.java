@@ -21,24 +21,24 @@ public class SaveDocumentListener implements FileDocumentManagerListener {
 
     @Override
     public void beforeDocumentSaving(@NotNull Document document) {
-        System.out.println("自动review "+ settingsState.enableAiReview);
-        if (settingsState.enableAiReview == false){
-            System.out.println("自动review 已关闭，不触发");
-            return;
-        }
-        Document currentDocument = null;
-        // 获取当前的project
-        Project project = util.getCurrentProjectFromDocument(document);
-        if (project != null) {
-            // 获取当前编辑的文件
-            currentDocument = util.getSelectedDocument(project);
-        }
-
-        if (currentDocument == null || !document.equals(currentDocument)){
-            return;
-        }
-
-        sendSaveEventToWebView(currentDocument, project);
+//        System.out.println("自动review "+ settingsState.enableAiReview);
+//        if (settingsState.enableAiReview == false){
+//            System.out.println("自动review 已关闭，不触发");
+//            return;
+//        }
+//        Document currentDocument = null;
+//        // 获取当前的project
+//        Project project = util.getCurrentProjectFromDocument(document);
+//        if (project != null) {
+//            // 获取当前编辑的文件
+//            currentDocument = util.getSelectedDocument(project);
+//        }
+//
+//        if (currentDocument == null || !document.equals(currentDocument)){
+//            return;
+//        }
+//
+//        sendSaveEventToWebView(currentDocument, project);
 
 //        try {
 //            String projectDir = project.getBasePath();
