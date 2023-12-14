@@ -2,7 +2,7 @@ package com.tabnine.vo;
 
 import static java.util.Collections.singletonMap;
 
-import com.common.CalculateHideScore;
+
 import com.google.gson.annotations.SerializedName;
 import com.tabnineCommon.binary.BinaryRequest;
 import org.jetbrains.annotations.Nullable;
@@ -16,7 +16,7 @@ public class AutocompleteRequest implements BinaryRequest<AutocompleteResponse> 
     public String languageId = "";
     public String file_project_path = "";
     public String git_path = "";
-    public CalculateHideScore calculate_hide_score = new CalculateHideScore();
+
 
     @SerializedName(value = "region_includes_beginning")
     public boolean regionIncludesBeginning;
