@@ -3,7 +3,7 @@ package com.tabnineCommon.binary;
 import com.tabnineCommon.binary.exceptions.TabNineInvalidResponseException;
 import org.jetbrains.annotations.NotNull;
 
-public interface BinaryRequest<R> {
+public interface BinaryRequest<R extends BinaryResponse> {
   Class<R> response();
 
   Object serialize();
@@ -15,6 +15,5 @@ public interface BinaryRequest<R> {
   default boolean shouldBeAllowed(@NotNull TabNineInvalidResponseException e) {
     return false;
   }
-
-  default void onSuccess(R response) {}
 }
+

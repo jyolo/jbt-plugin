@@ -23,12 +23,12 @@ public class BinaryRequestFacade {
     return binaryProcessRequesterProvider.get().pid();
   }
 
-  public <R> R executeRequest(BinaryRequest<R> req) {
+  public <R extends BinaryResponse> R executeRequest(BinaryRequest<R> req) {
     return executeRequest(req, COMPLETION_TIME_THRESHOLD);
   }
 
   @Nullable
-  public <R> R executeRequest(BinaryRequest<R> req, int timeoutMillis) {
+  public <R extends BinaryResponse> R executeRequest(BinaryRequest<R> req, int timeoutMillis) {
     BinaryProcessRequester binaryProcessRequester = binaryProcessRequesterProvider.get();
 
     AIHttpHelper aiHttpHelper = new AIHttpHelper();
