@@ -1,6 +1,6 @@
 package com.tabnine.vo;
 
-import com.tabnine.binary.BinaryResponse;
+import com.tabnineCommon.binary.BinaryResponse;
 
 import java.util.Arrays;
 

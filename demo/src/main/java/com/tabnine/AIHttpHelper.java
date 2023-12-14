@@ -2,14 +2,15 @@ package com.tabnine;
 
 import com.common.Snippet;
 import com.obiscr.tabnine.Constants;
+
 import com.tabnineCommon.binary.BinaryRequest;
 import com.tabnineCommon.binary.BinaryResponse;
 import com.tabnine.vo.AutocompleteRequest;
 import com.tabnine.vo.AutocompleteResponse;
-import com.obiscr.tabnine.binary.requests.autocomplete.CompletionMetadata;
-import com.obiscr.tabnine.binary.requests.autocomplete.ResultEntry;
-import com.obiscr.tabnine.general.CompletionKind;
-import com.obiscr.tabnine.general.CompletionOrigin;
+import com.tabnineCommon.binary.requests.autocomplete.CompletionMetadata;
+import com.tabnine.vo.ResultEntry;
+import com.tabnineCommon.general.CompletionKind;
+import com.tabnineCommon.general.CompletionOrigin;
 import com.obiscr.tabnine.userSettings.AppSettingsState;
 import com.tabnine.vo.*;
 import com.intellij.openapi.application.ApplicationInfo;
