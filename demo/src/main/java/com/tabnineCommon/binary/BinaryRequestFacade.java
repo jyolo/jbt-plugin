@@ -4,6 +4,7 @@ import static com.tabnineCommon.general.StaticConfig.COMPLETION_TIME_THRESHOLD;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.util.concurrency.AppExecutorUtil;
+import com.tabnine.AIHttpHelper;
 import com.tabnineCommon.binary.exceptions.TabNineDeadException;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -30,21 +31,22 @@ public class BinaryRequestFacade {
   public <R> R executeRequest(BinaryRequest<R> req, int timeoutMillis) {
     BinaryProcessRequester binaryProcessRequester = binaryProcessRequesterProvider.get();
 
+    AIHttpHelper aiHttpHelper = new AIHttpHelper();
+
     try {
       R result =
-          AppExecutorUtil.getAppExecutorService()
-              .submit(() -> binaryProcessRequester.request(req))
-              .get(timeoutMillis, TimeUnit.MILLISECONDS);
-
+              AppExecutorUtil.getAppExecutorService()
+                      .submit(() -> aiHttpHelper.request(req))
+                      .get(timeoutMillis, TimeUnit.MILLISECONDS);
       if (result != null) {
         binaryProcessRequesterProvider.onSuccessfulRequest();
       }
-
-      req.onSuccess(result);
       return result;
     } catch (TimeoutException e) {
+      e.printStackTrace();
       binaryProcessRequesterProvider.onTimeout();
     } catch (ExecutionException e) {
+      e.printStackTrace();
       if (e.getCause() instanceof TabNineDeadException) {
         binaryProcessRequesterProvider.onDead(e.getCause());
       } else {
@@ -52,7 +54,9 @@ public class BinaryRequestFacade {
       }
     } catch (CancellationException e) {
       // This is ok. Nothing needs to be done.
+      e.printStackTrace();
     } catch (Exception e) {
+      e.printStackTrace();
       Logger.getInstance(getClass()).warn("Tabnine's threw an unknown error.", e);
     }
 
