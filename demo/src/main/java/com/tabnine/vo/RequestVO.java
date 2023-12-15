@@ -1,7 +1,5 @@
 package com.tabnine.vo;
 
-import com.common.CalculateHideScore;
-
 
 public class RequestVO {
 
@@ -17,7 +15,6 @@ public class RequestVO {
     String user_id;
     public String git_path = "";
 
-    public CalculateHideScore calculate_hide_score = new CalculateHideScore();
 
     public RequestVO() {
     }
@@ -119,13 +116,5 @@ public class RequestVO {
         this.model = model;
     }
 
-    public void setCalculateHideScore(CalculateHideScore calculateHideScore) {
-        this.calculate_hide_score.is_whitespace_after_cursor = calculateHideScore.is_whitespace_after_cursor;
-        this.calculate_hide_score.prefix = calculateHideScore.prefix;
-        this.calculate_hide_score.document_length = calculateHideScore.document_length;
-        this.calculate_hide_score.prompt_end_pos = calculateHideScore.prompt_end_pos;
-        this.calculate_hide_score.previous_label = calculateHideScore.previous_label;
-        this.calculate_hide_score.previous_label_timestamp = calculateHideScore.previous_label_timestamp;
-    }
 
 }

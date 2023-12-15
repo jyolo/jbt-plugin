@@ -10,9 +10,9 @@ public class VoidBinaryProcessRequester implements BinaryProcessRequester {
     return INSTANCE;
   }
 
-  @Nullable
+
   @Override
-  public <R> R request(BinaryRequest<R> request) throws TabNineDeadException {
+  public <R extends BinaryResponse> @Nullable R request(BinaryRequest<R> request) throws TabNineDeadException {
     return null;
   }
 

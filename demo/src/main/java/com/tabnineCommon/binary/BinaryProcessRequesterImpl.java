@@ -31,21 +31,41 @@ public class BinaryProcessRequesterImpl implements BinaryProcessRequester {
    */
   @Override
   @Nullable
-  public synchronized <R> R request(BinaryRequest<R> request) throws TabNineDeadException {
+  public synchronized <R extends BinaryResponse> R request(BinaryRequest<R> request)
+          throws TabNineDeadException {
     if (parsedBinaryIO.isDead()) {
       throw new TabNineDeadException("Binary is dead");
     }
 
     try {
+//      if (request instanceof AutocompleteRequest) {
+////        System.out.println("======request====:" + request);
+//        settingsState.setInReasoning(true);
+//        AutocompleteResponse autocompleteResponse = executeHttpRequest((AutocompleteRequest) request);
+////        System.out.println("======autocompleteResponse====:" + autocompleteResponse);
+//        settingsState.setInReasoning(false);
+//        return (R) autocompleteResponse;
+//      } else {
+//        parsedBinaryIO.writeRequest(wrapWithBinaryRequest(request.serialize()));
+//        R res = readResult(request);
+//        return res;
+//      }
+//      System.out.println("======request.serialize()====:" + request.serialize());
+//      if (request instanceof  AutocompleteRequest) {
+//        System.out.println("genOldSuffix(req.before):"+ genOldPrefix(((AutocompleteRequest) request).before));
+//      }
       parsedBinaryIO.writeRequest(wrapWithBinaryRequest(request.serialize()));
 
-      return readResult(request);
+      R res = readResult(request);
+//      System.out.println("======res====:" + res);
+      return res;
     } catch (IOException e) {
       Logger.getInstance(getClass()).warn("Exception communicating with the binary", e);
 
       throw new TabNineDeadException(e);
     }
   }
+
 
   @Override
   public Long pid() {
@@ -58,7 +78,7 @@ public class BinaryProcessRequesterImpl implements BinaryProcessRequester {
   }
 
   @Nullable
-  private <R> R readResult(BinaryRequest<R> request) throws IOException, TabNineDeadException {
+  private <R extends BinaryResponse> R readResult(BinaryRequest<R> request) throws IOException, TabNineDeadException {
     try {
       R response = parsedBinaryIO.readResponse(request.response());
 

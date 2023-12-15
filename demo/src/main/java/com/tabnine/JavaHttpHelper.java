@@ -5,12 +5,11 @@ import com.google.gson.JsonObject;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.extensions.PluginId;
-import com.obiscr.chatgpt.core.Constant;
-//import com.tabnine.vo.CodeUploadRequestVO;
+import settings.Constants;
 import com.tabnine.vo.RequestVO;
 import com.tabnine.vo.ResponseVO;
 import okhttp3.*;
-import com.obiscr.tabnine.inline.InlineCompletionHandler;
+import com.tabnineCommon.inline.InlineCompletionHandler;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -25,7 +24,7 @@ public class JavaHttpHelper {
 //    List<HttpURLConnection> connections = new ArrayList<>();
 
     private String ideName = ApplicationInfo.getInstance().getVersionName();
-    private String ideVersion = PluginManager.getPlugin(PluginId.getId(Constant.PLUGIN_ID)).getVersion();
+    private String ideVersion = PluginManager.getPlugin(PluginId.getId(Constants.PLUGIN_ID)).getVersion();
     private String ideRealVersion = ApplicationInfo.getInstance().getFullVersion() + "  " +
             ApplicationInfo.getInstance().getApiVersion();
 

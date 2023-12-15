@@ -1,7 +1,5 @@
 package com.tabnine;
 
-import com.common.Snippet;
-import com.obiscr.tabnine.Constants;
 
 import com.tabnineCommon.binary.BinaryRequest;
 import com.tabnineCommon.binary.BinaryResponse;
@@ -11,19 +9,19 @@ import com.tabnineCommon.binary.requests.autocomplete.CompletionMetadata;
 import com.tabnine.vo.ResultEntry;
 import com.tabnineCommon.general.CompletionKind;
 import com.tabnineCommon.general.CompletionOrigin;
-import com.obiscr.tabnine.userSettings.AppSettingsState;
+import com.tabnineCommon.userSettings.AppSettingsState;
 import com.tabnine.vo.*;
 import com.intellij.openapi.application.ApplicationInfo;
-import com.obiscr.chatgpt.settings.OpenAISettingsState;
+import settings.OpenAISettingsState;
 import com.tabnine.vo.RequestVO;
 import com.tabnine.vo.ResponseVO;
-
+import settings.Constants;
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.obiscr.tabnine.utils.GetUser.getUserId;
+import settings.OpenAISettingsState;
+import com.tabnineCommon.userSettings.AppSettingsState;
 
 public class AIHttpHelper {
 
@@ -33,31 +31,31 @@ public class AIHttpHelper {
 
     public  <R extends BinaryResponse> R request(BinaryRequest<R> request) {
         if (request instanceof AutocompleteRequest) {
-            settingsState.setInReasoning(true);
+//            settingsState.setInReasoning(true);
             boolean err_flag = true;
             try {
                 AutocompleteResponse autocompleteResponse = executeHttpRequest((AutocompleteRequest)request);
                 if (autocompleteResponse == null){
-                    settingsState.setResultContent("error");
+//                    settingsState.setResultContent("error");
                 } else if (autocompleteResponse.getNewPrefix().isEmpty()) {
-                    settingsState.setResultContent("empty");
+//                    settingsState.setResultContent("empty");
                 } else {
-                    settingsState.setResultContent("");
+//                    settingsState.setResultContent("");
                 }
                 return (R)autocompleteResponse;
             } catch (SocketException e){
                 System.out.println("多线程手动关闭连接；异常抛出： " + e);
-                settingsState.setInReasoning(true);
+//                settingsState.setInReasoning(true);
                 err_flag = false;
                 return (R)null;
             } catch (Exception e){
                 System.out.println("异常抛出： " + e);
-                settingsState.setResultContent("error");
+//                settingsState.setResultContent("error");
                 e.printStackTrace();
                 throw e;
             } finally {
                 if (err_flag) {
-                    settingsState.setInReasoning(false);
+//                    settingsState.setInReasoning(false);
                 }
             }
         }
@@ -81,13 +79,12 @@ public class AIHttpHelper {
 //            requestVO.setPrompt(req.before);
 //        }
         requestVO.setLanguageId(req.languageId);
-        requestVO.setBetaMode(settingsState.getBetaMode());
+//        requestVO.setBetaMode(settingsState.getBetaMode());
         requestVO.setTriggerModel(req.trigger_mode);
         requestVO.setFileProjectPath(req.file_project_path);
-        requestVO.setCalculateHideScore(req.calculate_hide_score);
 
-        requestVO.setRepo(Snippet.projectName);
-        requestVO.setUserId(getUserId());
+//        requestVO.setRepo(Snippet.projectName);
+//        requestVO.setUserId(getUserId());
         requestVO.setGitpath(req.git_path);
         System.out.println("requestVO:" + requestVO);
 
@@ -102,9 +99,9 @@ public class AIHttpHelper {
             Map<String, Object> system_plugin_configs = responseVO.getSystem_plugin_configs();
             Double context_lines_limit = (Double) system_plugin_configs.getOrDefault("context_lines_limit", appSettingsState.getMaxLines());
             int max_context_lines = context_lines_limit.intValue();
-            if(max_context_lines != 0 && appSettingsState.getMaxLines() != max_context_lines){
-                appSettingsState.setMaxLines(max_context_lines);
-            }
+//            if(max_context_lines != 0 && appSettingsState.getMaxLines() != max_context_lines){
+//                appSettingsState.setMaxLines(max_context_lines);
+//            }
 
             AutocompleteResponse autocompleteResponse = new AutocompleteResponse();
             autocompleteResponse.setOld_prefix(old_prefix);
@@ -122,10 +119,10 @@ public class AIHttpHelper {
             entry.setNew_suffix(genNewSuffix(choiceText));
             entry.setOld_suffix(old_suffix);
             CompletionMetadata metadata = new CompletionMetadata();
-            metadata.setOrigin(CompletionOrigin.LOCAL);
-            metadata.setDetail("5%");
-            metadata.setResponse_id(responseVO.getId());
-            metadata.setCompletion_kind(CompletionKind.Classic);
+//            metadata.setOrigin(CompletionOrigin.LOCAL);
+//            metadata.setDetail("5%");
+//            metadata.setResponse_id(responseVO.getId());
+//            metadata.setCompletion_kind(CompletionKind.Classic);
             Map<String, Object> objectObjectHashMap = new HashMap<>();
             objectObjectHashMap.put("snippet_id", null);
             objectObjectHashMap.put("uer_intenl", null);
@@ -133,7 +130,7 @@ public class AIHttpHelper {
             objectObjectHashMap.put("completion_index", null);
             objectObjectHashMap.put("is_cached", null);
             objectObjectHashMap.put("deprecated", null);
-            metadata.setSnippet_context(objectObjectHashMap);
+//            metadata.setSnippet_context(objectObjectHashMap);
             entry.setCompletion_metadata(metadata);
             autocompleteResponse.setUser_message(new String[]{"User1", "User2"});
             autocompleteResponse.setResults(new ResultEntry[]{entry});
@@ -176,7 +173,7 @@ public class AIHttpHelper {
                 executeCodeCompletionHttpRequest(Coderequest);
             }
 
-            CacheUtil.cacheCompletion(autocompleteResponse);
+//            CacheUtil.cacheCompletion(autocompleteResponse);
             return autocompleteResponse;
         } catch (SocketException e) {
             throw e;

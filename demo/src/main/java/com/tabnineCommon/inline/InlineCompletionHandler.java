@@ -24,9 +24,12 @@ import com.tabnineCommon.inline.render.GraphicsUtilsKt;
 import com.tabnineCommon.intellij.completions.CompletionUtils;
 import com.tabnineCommon.prediction.CompletionFacade;
 import com.tabnineCommon.prediction.TabNineCompletion;
+
+import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -43,6 +46,8 @@ public class InlineCompletionHandler {
   private Future<?> lastDebounceRenderTask = null;
   private Future<?> lastFetchAndRenderTask = null;
   private Future<?> lastFetchInBackgroundTask = null;
+  public static CompletionAdjustment last_completionAdjustment;
+  public static Map<String, HttpURLConnection> connection_dict = new TreeMap<>();
 
   public InlineCompletionHandler(
       CompletionFacade completionFacade,

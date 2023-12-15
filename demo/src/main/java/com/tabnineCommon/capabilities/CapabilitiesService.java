@@ -7,17 +7,14 @@ import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.util.messages.MessageBus;
 import com.tabnineCommon.binary.BinaryRequestFacade;
-import com.tabnineCommon.binary.requests.capabilities.CapabilitiesRequest;
+//import com.tabnineCommon.binary.requests.capabilities.CapabilitiesRequest;
 import com.tabnineCommon.binary.requests.capabilities.CapabilitiesResponse;
 import com.tabnineCommon.binary.requests.capabilities.RefreshRemotePropertiesRequest;
 import com.tabnineCommon.config.Config;
 import com.tabnineCommon.general.DependencyContainer;
 import com.tabnineCommon.lifecycle.CapabilitiesStateSingleton;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+
+import java.util.*;
 
 public class CapabilitiesService {
 
@@ -105,16 +102,20 @@ public class CapabilitiesService {
   }
 
   private void fetchCapabilities() {
-    final JsonElement jsonResponse = binaryRequestFacade.executeRequest(new CapabilitiesRequest());
-    if (jsonResponse == null) {
-      return;
-    }
-    final CapabilitiesResponse capabilitiesResponse =
-        GSON.fromJson(jsonResponse, CapabilitiesResponse.class);
-
-    if (capabilitiesResponse.getEnabledFeatures() != null) {
+//    final CapabilitiesResponse capabilitiesResponse =
+//        binaryRequestFacade.executeRequest(new CapabilitiesRequest());
+    final CapabilitiesResponse capabilitiesResponse = getFeignCapabilitiesResponse();
+    if (capabilitiesResponse != null && capabilitiesResponse.getEnabledFeatures() != null) {
       setCapabilities(capabilitiesResponse);
     }
+  }
+
+  private CapabilitiesResponse getFeignCapabilitiesResponse() {
+    CapabilitiesResponse capabilitiesResponse = new CapabilitiesResponse();
+    List<Capability> list = new ArrayList<>();
+    list.add(Capability.INLINE_SUGGESTIONS);
+    capabilitiesResponse.setEnabledFeatures(list);
+    return capabilitiesResponse;
   }
 
   private void setCapabilities(CapabilitiesResponse capabilitiesResponse) {
