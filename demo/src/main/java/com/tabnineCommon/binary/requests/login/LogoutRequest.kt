@@ -12,7 +12,7 @@ class LogoutRequest(private val onSuccessFn: (() -> Unit)? = null) : BinaryReque
         return mapOf("Logout" to this)
     }
 
-    override fun onSuccess(response: EmptyResponse?) {
+    fun onSuccess(response: EmptyResponse?) {
         onSuccessFn?.let { it() }
     }
 }
