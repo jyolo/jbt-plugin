@@ -1,27 +1,19 @@
 package com.tabnine;
 
 
+import com.intellij.openapi.application.ApplicationInfo;
+import com.tabnine.vo.*;
 import com.tabnineCommon.binary.BinaryRequest;
 import com.tabnineCommon.binary.BinaryResponse;
-import com.tabnine.vo.AutocompleteRequest;
-import com.tabnine.vo.AutocompleteResponse;
 import com.tabnineCommon.binary.requests.autocomplete.CompletionMetadata;
-import com.tabnine.vo.ResultEntry;
-import com.tabnineCommon.general.CompletionKind;
-import com.tabnineCommon.general.CompletionOrigin;
-import com.tabnineCommon.userSettings.AppSettingsState;
-import com.tabnine.vo.*;
-import com.intellij.openapi.application.ApplicationInfo;
-import settings.OpenAISettingsState;
-import com.tabnine.vo.RequestVO;
-import com.tabnine.vo.ResponseVO;
+import settings.AppSettingsState;
 import settings.Constants;
+import settings.OpenAISettingsState;
+
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
-import settings.OpenAISettingsState;
-import com.tabnineCommon.userSettings.AppSettingsState;
 
 public class AIHttpHelper {
 
