@@ -29,7 +29,7 @@ public class BinaryRequestFacade {
 
   @Nullable
   public <R extends BinaryResponse> R executeRequest(BinaryRequest<R> req, int timeoutMillis) {
-    BinaryProcessRequester binaryProcessRequester = binaryProcessRequesterProvider.get();
+//    BinaryProcessRequester binaryProcessRequester = binaryProcessRequesterProvider.get();
 
     AIHttpHelper aiHttpHelper = new AIHttpHelper();
 

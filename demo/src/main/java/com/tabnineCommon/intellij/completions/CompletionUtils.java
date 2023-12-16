@@ -8,7 +8,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
-import com.tabnineCommon.binary.requests.autocomplete.ResultEntry;
+import com.tabnine.vo.ResultEntry;
 import com.tabnineCommon.general.SuggestionTrigger;
 import com.tabnineCommon.prediction.TabNineCompletion;
 import org.jetbrains.annotations.NotNull;

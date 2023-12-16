@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import com.tabnineCommon.binary.BinaryRequest;
 import org.jetbrains.annotations.Nullable;
 
-public class AutocompleteRequest implements BinaryRequest<AutocompleteResponse> {
+public class AutocompleteRequest implements BinaryRequest {
     public String before;
     public String after;
     public String filename;

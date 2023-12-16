@@ -1,7 +1,7 @@
 package com.tabnineCommon.inline
 
-import com.tabnineCommon.binary.requests.autocomplete.AutocompleteRequest
-import com.tabnineCommon.binary.requests.autocomplete.AutocompleteResponse
+import com.tabnine.vo.AutocompleteRequest
+import com.tabnine.vo.AutocompleteResponse
 import com.tabnineCommon.general.SuggestionTrigger
 
 abstract class CompletionAdjustment {
@@ -14,7 +14,7 @@ abstract class CompletionAdjustment {
     }
 
     fun adjustRequest(request: AutocompleteRequest): AutocompleteRequest {
-        request.cached_only = cachedOnly
+//        request.cached_only = cachedOnly
         return adjustRequestInner(request)
     }
 

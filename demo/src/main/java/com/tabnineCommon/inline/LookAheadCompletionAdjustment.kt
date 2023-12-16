@@ -1,8 +1,8 @@
 package com.tabnineCommon.inline
 
-import com.tabnineCommon.binary.requests.autocomplete.AutocompleteRequest
-import com.tabnineCommon.binary.requests.autocomplete.AutocompleteResponse
-import com.tabnineCommon.binary.requests.autocomplete.ResultEntry
+import com.tabnine.vo.AutocompleteRequest
+import com.tabnine.vo.AutocompleteResponse
+import com.tabnine.vo.ResultEntry
 import com.tabnineCommon.general.SuggestionTrigger
 import java.util.Arrays
 

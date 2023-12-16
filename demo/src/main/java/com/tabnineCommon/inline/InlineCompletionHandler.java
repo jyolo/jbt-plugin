@@ -9,8 +9,8 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.util.ObjectUtils;
+import com.tabnine.vo.AutocompleteResponse;
 import com.tabnineCommon.binary.BinaryRequestFacade;
-import com.tabnineCommon.binary.requests.autocomplete.AutocompleteResponse;
 import com.tabnineCommon.binary.requests.notifications.shown.SnippetShownRequest;
 import com.tabnineCommon.binary.requests.notifications.shown.SuggestionDroppedReason;
 import com.tabnineCommon.binary.requests.notifications.shown.SuggestionShownRequest;
@@ -226,7 +226,7 @@ public class InlineCompletionHandler {
       int offset,
       Integer tabSize,
       @NotNull CompletionAdjustment completionAdjustment) {
-    AutocompleteResponse completionsResponse =
+    com.tabnine.vo.@Nullable AutocompleteResponse completionsResponse =
         this.completionFacade.retrieveCompletions(editor, offset, tabSize, completionAdjustment);
 
     if (completionsResponse == null || completionsResponse.results.length == 0) {
@@ -295,10 +295,10 @@ public class InlineCompletionHandler {
   }
 
   private List<TabNineCompletion> createCompletions(
-      AutocompleteResponse completions,
-      @NotNull Document document,
-      int offset,
-      SuggestionTrigger suggestionTrigger) {
+          @Nullable AutocompleteResponse completions,
+          @NotNull Document document,
+          int offset,
+          SuggestionTrigger suggestionTrigger) {
     return IntStream.range(0, completions.results.length)
         .mapToObj(
             index ->

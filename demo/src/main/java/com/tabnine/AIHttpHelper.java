@@ -22,10 +22,15 @@ public class AIHttpHelper {
     static String FIM_INDICATOR = "<FILL_HERE>";
 
     public  <R extends BinaryResponse> R request(BinaryRequest<R> request) {
+        System.out.println("6666666666666666666666666666");
+        System.out.println(request);
+        System.out.println(request instanceof AutocompleteRequest);
+        System.out.println("6666666666666666666666666666");
         if (request instanceof AutocompleteRequest) {
 //            settingsState.setInReasoning(true);
             boolean err_flag = true;
             try {
+                System.out.println("77777777777777777777777777777");
                 AutocompleteResponse autocompleteResponse = executeHttpRequest((AutocompleteRequest)request);
                 if (autocompleteResponse == null){
 //                    settingsState.setResultContent("error");
@@ -84,6 +89,8 @@ public class AIHttpHelper {
         try {
             String old_prefix = genOldPrefix(req.before);
             String old_suffix = genOldSuffix(req.before);
+            System.out.println("88888888888888888888888888888888");
+            System.out.println(settingsState.getServerUrl());
             ResponseVO responseVO = JavaHttpHelper.post(genUrl(settingsState.getServerUrl(), settingsState.getEngine()), requestVO, instance.apiKey, req.completionAdjustment_hash_code);
             System.out.println("responseVO:" + responseVO);
 

@@ -11,8 +11,8 @@ import com.tabnine.prediction.TabNineWeigher;
 import com.tabnine.selections.TabNineLookupListener;
 import com.tabnine.statusBar.StatusBarUpdater;
 import com.tabnineCommon.binary.BinaryRequestFacade;
-import com.tabnineCommon.binary.requests.autocomplete.AutocompleteResponse;
-import com.tabnineCommon.binary.requests.autocomplete.ResultEntry;
+import com.tabnine.vo.AutocompleteResponse;
+import com.tabnine.vo.ResultEntry;
 import com.tabnineCommon.capabilities.RenderingMode;
 import com.tabnineCommon.capabilities.SuggestionsMode;
 import com.tabnineCommon.capabilities.SuggestionsModeService;
@@ -59,16 +59,17 @@ public class TabNineCompletionContributor extends CompletionContributor {
       return;
     }
 
-    if (!parameters.isAutoPopup()) {
-      completionsEventSender.sendManualSuggestionTrigger(RenderingMode.AUTOCOMPLETE);
-    }
-
-    if (suggestionsModeService.getSuggestionMode().isInlineEnabled()) {
-      registerLookupListener(parameters, tabNineInlineLookupListener);
-    }
-    if (!suggestionsModeService.getSuggestionMode().isPopupEnabled()) {
-      return;
-    }
+//    if (!parameters.isAutoPopup()) {
+//      completionsEventSender.sendManualSuggestionTrigger(RenderingMode.AUTOCOMPLETE);
+//    }
+//
+//    if (suggestionsModeService.getSuggestionMode().isInlineEnabled()) {
+//      registerLookupListener(parameters, tabNineInlineLookupListener);
+//    }
+//    if (!suggestionsModeService.getSuggestionMode().isPopupEnabled()) {
+//      return;
+//    }
+    System.out.println("1111111111111111111111111111111111");
     registerLookupListener(parameters, tabNineLookupListener);
     AutocompleteResponse completions =
         this.completionFacade.retrieveCompletions(

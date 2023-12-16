@@ -15,8 +15,10 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
 import com.tabnineCommon.binary.BinaryRequestFacade;
 import com.tabnineCommon.binary.exceptions.BinaryCannotRecoverException;
-import com.tabnineCommon.binary.requests.autocomplete.AutocompleteRequest;
-import com.tabnineCommon.binary.requests.autocomplete.AutocompleteResponse;
+//import com.tabnineCommon.binary.requests.autocomplete.AutocompleteRequest;
+import com.tabnine.vo.AutocompleteRequest;
+//import com.tabnineCommon.binary.requests.autocomplete.AutocompleteResponse;
+import com.tabnine.vo.AutocompleteResponse;
 import com.tabnineCommon.capabilities.SuggestionsModeService;
 import com.tabnineCommon.inline.CompletionAdjustment;
 import java.nio.file.Files;
@@ -82,7 +84,7 @@ public class CompletionFacade {
       @Nullable Integer tabSize,
       @Nullable CompletionAdjustment completionAdjustment) {
     Document document = editor.getDocument();
-
+    System.out.println("2222222222222222222222222222222222222");
     int begin = Integer.max(0, offset - MAX_OFFSET);
     int end = Integer.min(document.getTextLength(), offset + MAX_OFFSET);
     AutocompleteRequest req = new AutocompleteRequest();
@@ -96,19 +98,19 @@ public class CompletionFacade {
     req.line = document.getLineNumber(offset);
     req.character = offset - document.getLineStartOffset(req.line);
     req.indentation_size = tabSize;
-    req.sdkPath = getSdkPath(editor);
+//    req.sdkPath = getSdkPath(editor);
 
     if (completionAdjustment != null) {
       completionAdjustment.adjustRequest(req);
     }
 
     AutocompleteResponse autocompleteResponse =
-        binaryRequestFacade.executeRequest(req, determineTimeoutBy(req.before));
+            (AutocompleteResponse) binaryRequestFacade.executeRequest(req, determineTimeoutBy(req.before));
 
     if (completionAdjustment != null) {
       completionAdjustment.adjustResponse(autocompleteResponse);
     }
-
+    System.out.println("33333333333333333333");
     return autocompleteResponse;
   }
 
