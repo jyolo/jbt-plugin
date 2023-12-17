@@ -54,7 +54,7 @@
 <!--        <preloadingActivity implementation="com.obiscr.tabnine.general.GettingStartedManager"/>-->
 <!--        <postStartupActivity implementation="com.obiscr.tabnine.Initializer"/>-->
 <!--        <statusBarWidgetProvider implementation="com.qianliuAiUi.statusBar.StatusBarProvider"/>-->
-<!--        <statusBarWidgetProvider implementation="com.obiscr.tabnine.statusBar.StatusBarProvider"/>-->
+<!--        <statusBarWidgetProvider implementation="com.tabnine.statusBar.StatusBarProvider"/>-->
 <!--        &lt;!&ndash;        <statusBarWidgetProvider implementation="com.tabnine.statusBar.StatusBarPromotionProvider"/>&ndash;&gt;-->
         <completion.contributor language="any" implementationClass="com.tabnine.intellij.completions.TabNineCompletionContributor" order="first"/>
 
