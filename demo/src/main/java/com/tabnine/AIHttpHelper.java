@@ -22,36 +22,32 @@ public class AIHttpHelper {
     static String FIM_INDICATOR = "<FILL_HERE>";
 
     public  <R extends BinaryResponse> R request(BinaryRequest<R> request) {
-        System.out.println("6666666666666666666666666666");
-        System.out.println(request);
-        System.out.println("6666666666666666666666666666");
         if (request instanceof AutocompleteRequest) {
-//            settingsState.setInReasoning(true);
+            settingsState.setInReasoning(true);
             boolean err_flag = true;
             try {
-                System.out.println("77777777777777777777777777777");
                 AutocompleteResponse autocompleteResponse = executeHttpRequest((AutocompleteRequest)request);
                 if (autocompleteResponse == null){
-//                    settingsState.setResultContent("error");
+                    settingsState.setResultContent("error");
                 } else if (autocompleteResponse.getNewPrefix().isEmpty()) {
-//                    settingsState.setResultContent("empty");
+                    settingsState.setResultContent("empty");
                 } else {
-//                    settingsState.setResultContent("");
+                    settingsState.setResultContent("");
                 }
                 return (R)autocompleteResponse;
             } catch (SocketException e){
                 System.out.println("多线程手动关闭连接；异常抛出： " + e);
-//                settingsState.setInReasoning(true);
+                settingsState.setInReasoning(true);
                 err_flag = false;
                 return (R)null;
             } catch (Exception e){
                 System.out.println("异常抛出： " + e);
-//                settingsState.setResultContent("error");
+                settingsState.setResultContent("error");
                 e.printStackTrace();
                 throw e;
             } finally {
                 if (err_flag) {
-//                    settingsState.setInReasoning(false);
+                    settingsState.setInReasoning(false);
                 }
             }
         }
@@ -85,7 +81,7 @@ public class AIHttpHelper {
         requestVO.setGitpath(req.git_path);
         System.out.println("requestVO:" + requestVO);
 
-        AppSettingsState appSettingsState = AppSettingsState.getInstance();
+//        AppSettingsState appSettingsState = AppSettingsState.getInstance();
         try {
             String old_prefix = genOldPrefix(req.before);
             String old_suffix = genOldSuffix(req.before);
@@ -136,41 +132,42 @@ public class AIHttpHelper {
             String ideName = applicationInfo.getVersionName();
 
             // 确保有数据的时候再上传数据，如果截断后没有数据，则不请求上报接口
-            if (responseVO.getPrompt_tokens() > 0) {
-                String model_completions_text = "";
-                if (responseVO.getModel_choices() != null) {
-                    model_completions_text = responseVO.getModel_choices()
-                            .stream()
-                            .findFirst()
-                            .map(ChoiceVO::getText)
-                            .orElse("");
-                }
-
-                ExtraVO extraVO = new ExtraVO(responseVO.getPrompt_tokens(), responseVO.getStart_time(),
-                        responseVO.getEnd_time(), responseVO.getCost_time(), responseVO.getModel_start_time(),
-                        responseVO.getModel_end_time(), responseVO.getModel_cost_time(), responseVO.getMax_token(),
-                        req.trigger_mode, req.file_project_path,
-                        responseVO.getIs_same(), model_completions_text);
-                CodeUploadRequestVO Coderequest = new CodeUploadRequestVO();
-                Coderequest.setExtra(extraVO);
-                Coderequest.setIs_code_completion(false);
-                Coderequest.setLanguageId(req.languageId);
-                Coderequest.setResponse_id(responseVO.getId());
-                Coderequest.setPrompts(responseVO.getPrompt());
-                Coderequest.setIde(ideName);
-                Coderequest.setCode_completions_text(choiceText);
-                Coderequest.setCurrent_model(responseVO.getModel());
-                if(responseVO.getServer_extra_kwargs() != null){
-                    Coderequest.setServer_extra_kwargs(responseVO.getServer_extra_kwargs());
-                }
-
-                System.out.println("------------------");
-                System.out.println(Coderequest);
-                System.out.println("------------------");
+//            if (responseVO.getPrompt_tokens() > 0) {
+//                String model_completions_text = "";
+//                if (responseVO.getModel_choices() != null) {
+//                    model_completions_text = responseVO.getModel_choices()
+//                            .stream()
+//                            .findFirst()
+//                            .map(ChoiceVO::getText)
+//                            .orElse("");
+//                }
+//
+//                ExtraVO extraVO = new ExtraVO(responseVO.getPrompt_tokens(), responseVO.getStart_time(),
+//                        responseVO.getEnd_time(), responseVO.getCost_time(), responseVO.getModel_start_time(),
+//                        responseVO.getModel_end_time(), responseVO.getModel_cost_time(), responseVO.getMax_token(),
+//                        req.trigger_mode, req.file_project_path,
+//                        responseVO.getIs_same(), model_completions_text);
+//                CodeUploadRequestVO Coderequest = new CodeUploadRequestVO();
+//                Coderequest.setExtra(extraVO);
+//                Coderequest.setIs_code_completion(false);
+//                Coderequest.setLanguageId(req.languageId);
+//                Coderequest.setResponse_id(responseVO.getId());
+//                Coderequest.setPrompts(responseVO.getPrompt());
+//                Coderequest.setIde(ideName);
+//                Coderequest.setCode_completions_text(choiceText);
+//                Coderequest.setCurrent_model(responseVO.getModel());
+//                if(responseVO.getServer_extra_kwargs() != null){
+//                    Coderequest.setServer_extra_kwargs(responseVO.getServer_extra_kwargs());
+//                }
+//
+//                System.out.println("------------------");
+//                System.out.println(Coderequest);
+//                System.out.println("------------------");
 //                executeCodeCompletionHttpRequest(Coderequest);
-            }
+//            }
 
 //            CacheUtil.cacheCompletion(autocompleteResponse);
+
             return autocompleteResponse;
         } catch (SocketException e) {
             throw e;

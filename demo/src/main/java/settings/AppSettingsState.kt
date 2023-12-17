@@ -6,6 +6,7 @@ import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.XmlSerializerUtil
+import com.tabnineCommon.userSettings.settingsDefaultColor
 
 //import com.obiscr.tabnine.inline.render.GraphicsUtils
 //
@@ -55,11 +56,19 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState?> {
     var maxLines: Int = Constants.DEFAULT_MAX_LINES
     var delayTime: Int = Constants.DELAY_TIME
     var shortcutKeys: String = Constants.SHORTCUTKEYS
-
-//    private var colorState = settingsDefaultColor
+    var autoPluginUpdates: Boolean = true
+    private var colorState = settingsDefaultColor
 
 //    var disableLanguageTableElement: List<DisableLanguageTableElement> = ArrayList()
-
+    var inlineHintColor: Int
+    get() = if (useDefaultColor) {
+        settingsDefaultColor
+    } else {
+        colorState
+    }
+    set(value) {
+        colorState = value
+    }
 
     override fun getState(): AppSettingsState {
         return this

@@ -14,7 +14,7 @@ import com.intellij.util.Alarm
 import com.tabnineCommon.UIMessages.Notifications
 import com.tabnineCommon.general.StaticConfig.TABNINE_PLUGIN_ID
 import com.tabnineCommon.userSettings.AppSettingsConfigurable
-import com.tabnineCommon.userSettings.AppSettingsState
+import settings.AppSettingsState;
 import java.util.concurrent.atomic.AtomicBoolean
 
 private const val FOUR_HOURS_IN_MILLIS = 4L * 60 * 60 * 1000

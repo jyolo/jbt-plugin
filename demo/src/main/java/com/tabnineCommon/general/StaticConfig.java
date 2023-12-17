@@ -15,7 +15,7 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.text.SemVer;
 import com.tabnineCommon.binary.exceptions.InvalidVersionPathException;
 import com.tabnine.config.Config;
-import com.tabnineCommon.userSettings.AppSettingsState;
+import settings.AppSettingsState;
 import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,8 +29,8 @@ public class StaticConfig {
   public static final PluginId TABNINE_PLUGIN_ID = PluginId.getId(TABNINE_PLUGIN_ID_RAW);
   public static final int MAX_COMPLETIONS = 5;
   public static final String BINARY_PROTOCOL_VERSION = "4.4.223";
-  public static final int COMPLETION_TIME_THRESHOLD = 5000;
-  public static final int NEWLINE_COMPLETION_TIME_THRESHOLD = 5000;
+  public static final int COMPLETION_TIME_THRESHOLD = 80000;
+  public static final int NEWLINE_COMPLETION_TIME_THRESHOLD = 8000;
   public static final int ILLEGAL_RESPONSE_THRESHOLD = 5;
   public static final int ADVERTISEMENT_MAX_LENGTH = 100;
   public static final int MAX_OFFSET = 100000; // 100 KB
@@ -142,9 +142,9 @@ public class StaticConfig {
     return Optional.empty();
   }
 
-  public static Boolean getIgnoreCertificateErrors() {
-    return AppSettingsState.getInstance().getIgnoreCertificateErrors();
-  }
+//  public static Boolean getIgnoreCertificateErrors() {
+//    return AppSettingsState.getInstance().getIgnoreCertificateErrors();
+//  }
 
   public static Optional<String> getTabnineEnterpriseHost() {
     String path = AppSettingsState.getInstance().getCloud2Url();

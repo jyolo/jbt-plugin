@@ -22,7 +22,7 @@ const val PROPERTIES_COMPONENT_NAME = "com.tabnine.enterprise-url"
  * The [State] and [Storage] annotations define the name of the data and the file name where
  * these persistent application settings are stored.
  */
-@State(name = "com.tabnine.userSettings.AppSettingsState", storages = [Storage("TabnineSettings.xml")])
+@State(name = "settings.AppSettingsState", storages = [Storage("TabnineSettings.xml")])
 class AppSettingsState : PersistentStateComponent<AppSettingsState?> {
     var useDefaultColor: Boolean = false
     var logFilePath: String = ""

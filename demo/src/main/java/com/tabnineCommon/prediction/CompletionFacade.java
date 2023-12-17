@@ -42,6 +42,9 @@ public class CompletionFacade {
       CompletionParameters parameters, @Nullable Integer tabSize) {
     try {
       String filename = getFilename(parameters.getOriginalFile().getVirtualFile());
+      System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+      System.out.println(filename);
+      System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
       return ApplicationUtil.runWithCheckCanceled(
           () ->
               retrieveCompletions(
@@ -84,7 +87,6 @@ public class CompletionFacade {
       @Nullable Integer tabSize,
       @Nullable CompletionAdjustment completionAdjustment) {
     Document document = editor.getDocument();
-    System.out.println("2222222222222222222222222222222222222");
     int begin = Integer.max(0, offset - MAX_OFFSET);
     int end = Integer.min(document.getTextLength(), offset + MAX_OFFSET);
     AutocompleteRequest req = new AutocompleteRequest();
@@ -110,7 +112,6 @@ public class CompletionFacade {
     if (completionAdjustment != null) {
       completionAdjustment.adjustResponse(autocompleteResponse);
     }
-    System.out.println("finaly 33333333333333333333");
     return autocompleteResponse;
   }
 

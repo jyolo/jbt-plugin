@@ -9,7 +9,7 @@ import com.intellij.psi.codeStyle.CommonCodeStyleSettings
 import com.intellij.ui.JBColor
 import com.tabnineCommon.capabilities.CapabilitiesService
 import com.tabnineCommon.capabilities.Capability
-import com.tabnineCommon.userSettings.AppSettingsState
+import settings.AppSettingsState
 import java.awt.Color
 import java.awt.Font
 import java.awt.font.TextAttribute

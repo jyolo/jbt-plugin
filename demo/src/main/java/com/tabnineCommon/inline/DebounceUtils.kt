@@ -2,7 +2,7 @@ package com.tabnineCommon.inline
 
 import com.tabnineCommon.capabilities.CapabilitiesService
 import com.tabnineCommon.capabilities.Capability
-import com.tabnineCommon.userSettings.AppSettingsState
+import settings.AppSettingsState
 
 object DebounceUtils {
     private val DEBOUNCE_CAPABILITIES = arrayListOf(

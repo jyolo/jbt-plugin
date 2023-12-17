@@ -38,6 +38,7 @@
         <applicationService serviceImplementation="settings.OpenAISettingsState"/>
         <applicationService serviceImplementation="com.common.RequestHeaders"/>
         <applicationService serviceImplementation="settings.AiReviewSettingsState"/>
+        <applicationService serviceImplementation="settings.AppSettingsState"/>
         <fileDocumentManagerListener implementation="ideActions.SaveDocumentListener"/>
 
 <!--        <projectService serviceImplementation="com.obiscr.chatgpt.core.ConversationManager"/>-->
@@ -65,7 +66,6 @@
         <actionPromoter implementation="com.tabnineCommon.inline.InlineActionsPromoter"/>
         <editorActionHandler action="EditorEscape" implementationClass="com.tabnineCommon.inline.EscapeHandler" id="previewEscape" order="before hide-hints"/>
         <editorFactoryDocumentListener implementation="com.tabnineCommon.inline.TabnineDocumentListener"/>
-        <applicationService serviceImplementation="settings.AppSettingsState"/>
         <fileType name="Tabnine project model file" implementationClass="com.tabnine.TabnineProjectModelFileType" extensions="tabnine,.tabnine,tabnine.model,.tabnine.model,model,.model"/>
         <fileType name="Tabnine ignore file" implementationClass="com.tabnine.TabnineIgnoreFileType" extensions="tabnineignore"/>
     </extensions>
