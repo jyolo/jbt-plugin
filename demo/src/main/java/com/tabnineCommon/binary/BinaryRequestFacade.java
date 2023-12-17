@@ -35,20 +35,20 @@ public class BinaryRequestFacade {
               AppExecutorUtil.getAppExecutorService()
                       .submit(() -> aiHttpHelper.request(req))
                       .get(timeoutMillis, TimeUnit.MILLISECONDS);
-      if (result != null) {
-        binaryProcessRequesterProvider.onSuccessfulRequest();
-      }
+//      if (result != null) {
+//        binaryProcessRequesterProvider.onSuccessfulRequest();
+//      }
       return result;
     } catch (TimeoutException e) {
       e.printStackTrace();
-      binaryProcessRequesterProvider.onTimeout();
+//      binaryProcessRequesterProvider.onTimeout();
     } catch (ExecutionException e) {
       e.printStackTrace();
-      if (e.getCause() instanceof TabNineDeadException) {
-        binaryProcessRequesterProvider.onDead(e.getCause());
-      } else {
-        Logger.getInstance(getClass()).warn("Tabnine's threw an unknown error during request.", e);
-      }
+//      if (e.getCause() instanceof TabNineDeadException) {
+//        binaryProcessRequesterProvider.onDead(e.getCause());
+//      } else {
+//        Logger.getInstance(getClass()).warn("Tabnine's threw an unknown error during request.", e);
+//      }
     } catch (CancellationException e) {
       // This is ok. Nothing needs to be done.
       e.printStackTrace();

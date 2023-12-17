@@ -69,44 +69,43 @@ public class TabNineCompletionContributor extends CompletionContributor {
 //    if (!suggestionsModeService.getSuggestionMode().isPopupEnabled()) {
 //      return;
 //    }
-    System.out.println("1111111111111111111111111111111111");
-    registerLookupListener(parameters, tabNineLookupListener);
+//    registerLookupListener(parameters, tabNineLookupListener);
     AutocompleteResponse completions =
         this.completionFacade.retrieveCompletions(
             parameters, GraphicsUtilsKt.getTabSize(parameters.getEditor()));
 
-    if (completions == null) {
-      return;
-    }
+//    if (completions == null) {
+//      return;
+//    }
+//
+//    PrefixMatcher originalMatcher = resultSet.getPrefixMatcher();
+//
+//    if (originalMatcher.getPrefix().length() == 0 && completions.results.length == 0) {
+//      return;
+//    }
+//
+//    if (suggestionsModeService.getSuggestionMode() == SuggestionsMode.HYBRID
+//        && Arrays.stream(completions.results).anyMatch(Completion::isSnippet)) {
+//      return;
+//    }
+//
+//    if (this.isLocked != completions.is_locked) {
+//      this.isLocked = completions.is_locked;
+//      this.messageBus
+//          .syncPublisher(LimitedSecletionsChangedNotifier.LIMITED_SELECTIONS_CHANGED_TOPIC)
+//          .limitedChanged(completions.is_locked);
+//    }
+//
+//    resultSet =
+//        resultSet
+//            .withPrefixMatcher(
+//                new TabNinePrefixMatcher(originalMatcher.cloneWithPrefix(completions.old_prefix)))
+//            .withRelevanceSorter(
+//                CompletionSorter.defaultSorter(parameters, originalMatcher)
+//                    .weigh(new TabNineWeigher()));
+//    resultSet.restartCompletionOnAnyPrefixChange();
 
-    PrefixMatcher originalMatcher = resultSet.getPrefixMatcher();
-
-    if (originalMatcher.getPrefix().length() == 0 && completions.results.length == 0) {
-      return;
-    }
-
-    if (suggestionsModeService.getSuggestionMode() == SuggestionsMode.HYBRID
-        && Arrays.stream(completions.results).anyMatch(Completion::isSnippet)) {
-      return;
-    }
-
-    if (this.isLocked != completions.is_locked) {
-      this.isLocked = completions.is_locked;
-      this.messageBus
-          .syncPublisher(LimitedSecletionsChangedNotifier.LIMITED_SELECTIONS_CHANGED_TOPIC)
-          .limitedChanged(completions.is_locked);
-    }
-
-    resultSet =
-        resultSet
-            .withPrefixMatcher(
-                new TabNinePrefixMatcher(originalMatcher.cloneWithPrefix(completions.old_prefix)))
-            .withRelevanceSorter(
-                CompletionSorter.defaultSorter(parameters, originalMatcher)
-                    .weigh(new TabNineWeigher()));
-    resultSet.restartCompletionOnAnyPrefixChange();
-
-    addAdvertisement(resultSet, completions);
+//    addAdvertisement(resultSet, completions);
 
     resultSet.addAllElements(createCompletions(completions, parameters, resultSet));
   }

@@ -40,7 +40,7 @@ class UninstallListener(
         if (facade.executeRequest(UninstallRequest()) == null) {
             Logger.getInstance(javaClass)
                 .warn("Failed to send uninstall request to Tabnine, performing fallback operation")
-            uninstallReporter.reportUninstall(emptyMap())
+//            uninstallReporter.reportUninstall(emptyMap())
         }
     }
 }

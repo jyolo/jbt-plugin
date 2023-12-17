@@ -101,7 +101,7 @@ public class BinaryProcessRequesterProvider {
     BinaryProcessGateway binaryProcessGateway =
         binaryProcessGatewayProvider.generateBinaryProcessGateway();
 
-    initProcess(binaryProcessGateway);
+//    initProcess(binaryProcessGateway);
 
     this.binaryProcessRequester =
         new BinaryProcessRequesterImpl(new ParsedBinaryIO(instanceOfGson(), binaryProcessGateway));

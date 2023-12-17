@@ -89,9 +89,9 @@
 <!--        <action class="com.obiscr.tabnine.inline.ShowPreviousTabnineInlineCompletionAction" id="ShowPreviousTabnineInlineCompletionAction" text="Show Previous Inline Completion">-->
 <!--            <keyboard-shortcut first-keystroke="alt OPEN_BRACKET" keymap="$default"/>-->
 <!--        </action>-->
-<!--        <action class="com.obiscr.tabnine.inline.AcceptTabnineInlineCompletionAction" id="AcceptTabnineInlineCompletionAction" text="Accept Inline Completion">-->
-<!--            <keyboard-shortcut first-keystroke="TAB" keymap="$default"/>-->
-<!--        </action>-->
+        <action class="com.tabnineCommon.inline.AcceptTabnineInlineCompletionAction" id="AcceptTabnineInlineCompletionAction" text="Accept Inline Completion">
+            <keyboard-shortcut first-keystroke="TAB" keymap="$default"/>
+        </action>
         <group id="ChatGPT" text="Search with ChatGPT" description="Search with ChatGPT">
             <group id="GenerateCodeGroup" class="actionGroups.GenerateCodeGroup"
                    icon="/icons/ai_coder_jetbrains_chatgpt_logo.svg" popup="true" compact="true" text="千流AI：代码生成" >

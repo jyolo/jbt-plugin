@@ -42,9 +42,6 @@ public class CompletionFacade {
       CompletionParameters parameters, @Nullable Integer tabSize) {
     try {
       String filename = getFilename(parameters.getOriginalFile().getVirtualFile());
-      System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-      System.out.println(filename);
-      System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
       return ApplicationUtil.runWithCheckCanceled(
           () ->
               retrieveCompletions(
