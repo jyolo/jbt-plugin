@@ -15,10 +15,10 @@ public class Constants {
     //    public static final int MIN_DELAY_TIME = 500;
     public static final int MAX_DELAY_TIME = 3000;
     public static final boolean DEFAULT_ENABLED = true;
-    public static final String DEFAULT_ENGINE = "codegen";
+    public static final String DEFAULT_ENGINE = "gemini";
     public static final String DEFAULT_MODEL = "fastertransformer";
     public static final String DEFAULT_BASE_HOST = Env.qianLiuServerUrl;
-    public static final String DEFAULT_SERVER_HOST = Env.qianLiuServerUrl + "/codepilot/v1";
+    public static final String DEFAULT_SERVER_HOST = Env.qianLiuServerUrl + "/v1/completion";
     public static final String CODE_COMPLETION_UPLOAD_URL = Env.qianLiuServerUrl + "/api/users/code_completion_log";
     public static final String SNIPPET_UPLOAD_URL = Env.qianLiuServerUrl + "/v1/snippet";
     public static final String DEFAULT_SERVER_URI = "completions";

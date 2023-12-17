@@ -110,7 +110,7 @@ public class CompletionFacade {
     if (completionAdjustment != null) {
       completionAdjustment.adjustResponse(autocompleteResponse);
     }
-    System.out.println("33333333333333333333");
+    System.out.println("finaly 33333333333333333333");
     return autocompleteResponse;
   }
 

@@ -48,7 +48,7 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState?> {
     var webviewProxyUrlSuffix = "/server"
     var webviewProxyUrl: String = "http://127.0.0.1:{port}" + webviewProxyUrlSuffix
 
-    var serverUrl: String = ""
+    var serverUrl: String = Constants.DEFAULT_SERVER_HOST
     var engine: String = Constants.DEFAULT_ENGINE
     var apiToken: String = ""
     var maxTokens: Int = Constants.DEFAULT_MAX_TOKENS

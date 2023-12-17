@@ -29,8 +29,8 @@ public class StaticConfig {
   public static final PluginId TABNINE_PLUGIN_ID = PluginId.getId(TABNINE_PLUGIN_ID_RAW);
   public static final int MAX_COMPLETIONS = 5;
   public static final String BINARY_PROTOCOL_VERSION = "4.4.223";
-  public static final int COMPLETION_TIME_THRESHOLD = 1000;
-  public static final int NEWLINE_COMPLETION_TIME_THRESHOLD = 3000;
+  public static final int COMPLETION_TIME_THRESHOLD = 5000;
+  public static final int NEWLINE_COMPLETION_TIME_THRESHOLD = 5000;
   public static final int ILLEGAL_RESPONSE_THRESHOLD = 5;
   public static final int ADVERTISEMENT_MAX_LENGTH = 100;
   public static final int MAX_OFFSET = 100000; // 100 KB

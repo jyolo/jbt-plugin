@@ -5,6 +5,7 @@ public class RequestVO {
 
     String prompt;
     //    int max_tokens;
+    Boolean stream = Boolean.FALSE;
     double temperature;
     String model;
     String language_id;
@@ -44,6 +45,10 @@ public class RequestVO {
         this.language_id = language_id;
         this.trigger_mode = trigger_mode;
         this.beta_mode = beta_mode;
+    }
+
+    public void setStream(Boolean stream) {
+        this.stream = stream;
     }
 
     public String getPrompt() {

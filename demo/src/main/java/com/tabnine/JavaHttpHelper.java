@@ -43,14 +43,15 @@ public class JavaHttpHelper {
     public static ResponseVO post(String url, RequestVO requestVO, String apiKey,String completionAdjustment_hash_code) throws IOException {
         // create URL obj
         URL requestUrl = new URL(url);
-
+        completionAdjustment_hash_code = "123";
         // open connection
         HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
         // save current connection with completionAdjustment_hash_code
         InlineCompletionHandler.connection_dict.put(completionAdjustment_hash_code, connection);
 
         System.out.println("------------requestVO-----------");
-        String last_completionAdjustment_hash_code =Integer.toHexString(InlineCompletionHandler.last_completionAdjustment.hashCode());
+//        String last_completionAdjustment_hash_code = Integer.toHexString(InlineCompletionHandler.last_completionAdjustment.hashCode());
+        String last_completionAdjustment_hash_code = Integer.toHexString(123455);
 
         // set POST request method
         connection.setRequestMethod("POST");
@@ -63,6 +64,9 @@ public class JavaHttpHelper {
         connection.setRequestProperty("ide", http.getIdeName());
         connection.setRequestProperty("ide-version", http.getIdeVersion());
         connection.setRequestProperty("ide-real-version", http.getIdeRealVersion());
+        connection.setRequestProperty("ide-real-version", http.getIdeRealVersion());
+        connection.setRequestProperty("model", "gemini-pro");
+        connection.setRequestProperty("service", "gemini");
 
         // enable output
         connection.setDoOutput(true);
@@ -78,7 +82,6 @@ public class JavaHttpHelper {
         // send request
         connection.connect();
 
-
         if (InlineCompletionHandler.connection_dict.size() > 0) {
             for (Map.Entry<String, HttpURLConnection> entry : InlineCompletionHandler.connection_dict.entrySet()) {
                 String key = entry.getKey();
@@ -88,8 +91,6 @@ public class JavaHttpHelper {
                 }
             }
         }
-
-
 
         // read response
 //        int responseCode = connection.getResponseCode();
@@ -106,6 +107,13 @@ public class JavaHttpHelper {
         }
         JsonObject emptyJsonObject = new JsonObject();
         String emptyJsonString = gson.toJson(emptyJsonObject);
+
+
+        System.out.println("=================================");
+        System.out.println(responseBody.length());
+        System.out.println(responseBody.toString());
+        System.out.println("=================================");
+
 
         if (responseBody.length() > 0) {
             try{

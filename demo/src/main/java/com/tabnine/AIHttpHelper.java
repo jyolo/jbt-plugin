@@ -24,7 +24,6 @@ public class AIHttpHelper {
     public  <R extends BinaryResponse> R request(BinaryRequest<R> request) {
         System.out.println("6666666666666666666666666666");
         System.out.println(request);
-        System.out.println(request instanceof AutocompleteRequest);
         System.out.println("6666666666666666666666666666");
         if (request instanceof AutocompleteRequest) {
 //            settingsState.setInReasoning(true);
@@ -65,6 +64,7 @@ public class AIHttpHelper {
 //        requestVO.setModel("fastertransformer");
         requestVO.setModel(Constants.DEFAULT_MODEL);
         requestVO.setTemperature(0.1);
+        requestVO.setStream(Boolean.FALSE);
         // fillModel 默认为true
         String prompt = String.format("%s%s%s", req.before, FIM_INDICATOR, req.after);
         requestVO.setPrompt(prompt);
@@ -89,18 +89,12 @@ public class AIHttpHelper {
         try {
             String old_prefix = genOldPrefix(req.before);
             String old_suffix = genOldSuffix(req.before);
-            System.out.println("88888888888888888888888888888888");
-            System.out.println(settingsState.getServerUrl());
-            ResponseVO responseVO = JavaHttpHelper.post(genUrl(settingsState.getServerUrl(), settingsState.getEngine()), requestVO, instance.apiKey, req.completionAdjustment_hash_code);
+            String url = settingsState.getServerUrl();
+            System.out.println("((((((url))))))");
+            System.out.println(url);
+            System.out.println("((((((url))))))");
+            ResponseVO responseVO = JavaHttpHelper.post(url, requestVO, instance.apiKey, req.completionAdjustment_hash_code);
             System.out.println("responseVO:" + responseVO);
-
-            // 如果有返回 context_lines_limit 并且与默认设置不一致的时候, 则 MaxLines 的配置改为服务端返回的
-            Map<String, Object> system_plugin_configs = responseVO.getSystem_plugin_configs();
-            Double context_lines_limit = (Double) system_plugin_configs.getOrDefault("context_lines_limit", appSettingsState.getMaxLines());
-            int max_context_lines = context_lines_limit.intValue();
-//            if(max_context_lines != 0 && appSettingsState.getMaxLines() != max_context_lines){
-//                appSettingsState.setMaxLines(max_context_lines);
-//            }
 
             AutocompleteResponse autocompleteResponse = new AutocompleteResponse();
             autocompleteResponse.setOld_prefix(old_prefix);
@@ -169,7 +163,11 @@ public class AIHttpHelper {
                 if(responseVO.getServer_extra_kwargs() != null){
                     Coderequest.setServer_extra_kwargs(responseVO.getServer_extra_kwargs());
                 }
-                executeCodeCompletionHttpRequest(Coderequest);
+
+                System.out.println("------------------");
+                System.out.println(Coderequest);
+                System.out.println("------------------");
+//                executeCodeCompletionHttpRequest(Coderequest);
             }
 
 //            CacheUtil.cacheCompletion(autocompleteResponse);
@@ -236,15 +234,6 @@ public class AIHttpHelper {
 //        String[] res_arr = split[split.length - 1].trim().split(" ");
 //        return res_arr[res_arr.length - 1];
         return "";
-    }
-    static String genUrl(String host, String engine) {
-        if (null == host || "".equals(host) || null == engine || "".equals(engine)) {
-            return String.format("%s/engines/%s/%s", Constants.DEFAULT_SERVER_HOST, Constants.DEFAULT_ENGINE, Constants.DEFAULT_SERVER_URI);
-        }
-        if (host.endsWith("/")) {
-            return String.format("%sengines/%s/%s", host, engine, Constants.DEFAULT_SERVER_URI);
-        }
-        return String.format("%s/engines/%s/%s", host, engine, Constants.DEFAULT_SERVER_URI);
     }
 
     static String genOldPrefix(String before) {
