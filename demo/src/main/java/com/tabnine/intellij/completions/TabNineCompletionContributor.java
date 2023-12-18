@@ -77,12 +77,11 @@ public class TabNineCompletionContributor extends CompletionContributor {
     if (completions == null) {
       return;
     }
-//
-//    PrefixMatcher originalMatcher = resultSet.getPrefixMatcher();
-//
-//    if (originalMatcher.getPrefix().length() == 0 && completions.results.length == 0) {
-//      return;
-//    }
+
+    PrefixMatcher originalMatcher = resultSet.getPrefixMatcher();
+    if (originalMatcher.getPrefix().length() == 0 && completions.results.length == 0) {
+      return;
+    }
 //
 //    if (suggestionsModeService.getSuggestionMode() == SuggestionsMode.HYBRID
 //        && Arrays.stream(completions.results).anyMatch(Completion::isSnippet)) {

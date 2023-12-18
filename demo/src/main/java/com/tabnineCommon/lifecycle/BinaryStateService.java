@@ -24,10 +24,10 @@ public class BinaryStateService {
   }
 
   private void updateState() {
-    final StateResponse stateResponse = this.binaryRequestFacade.executeRequest(new StateRequest());
+//    final StateResponse stateResponse = this.binaryRequestFacade.executeRequest(new StateRequest());
 
-    if (stateResponse != null) {
-      BinaryStateSingleton.getInstance().set(stateResponse);
-    }
+//    if (stateResponse != null) {
+//      BinaryStateSingleton.getInstance().set(stateResponse);
+//    }
   }
 }

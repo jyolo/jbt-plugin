@@ -77,16 +77,16 @@ public class InlineCompletionHandler {
       return;
     }
 
-    if (lastShownSuggestion != null) {
-      SuggestionDroppedReason reason =
-          completionAdjustment instanceof LookAheadCompletionAdjustment
-              ? SuggestionDroppedReason.ScrollLookAhead
-              : SuggestionDroppedReason.UserNotTypedAsSuggested;
-      // if the last rendered suggestion is not null, this means that the user has typed something
-      // that doesn't match the previous suggestion - hence the reason is `UserNotTypedAsSuggested`
-      // (or `ScrollLookAhead` if the suggestion's source is from look-ahead).
-      completionsEventSender.sendSuggestionDropped(editor, lastShownSuggestion, reason);
-    }
+//    if (lastShownSuggestion != null) {
+//      SuggestionDroppedReason reason =
+//          completionAdjustment instanceof LookAheadCompletionAdjustment
+//              ? SuggestionDroppedReason.ScrollLookAhead
+//              : SuggestionDroppedReason.UserNotTypedAsSuggested;
+//      // if the last rendered suggestion is not null, this means that the user has typed something
+//      // that doesn't match the previous suggestion - hence the reason is `UserNotTypedAsSuggested`
+//      // (or `ScrollLookAhead` if the suggestion's source is from look-ahead).
+//      completionsEventSender.sendSuggestionDropped(editor, lastShownSuggestion, reason);
+//    }
 
     ApplicationManager.getApplication()
         .invokeLater(
@@ -274,21 +274,21 @@ public class InlineCompletionHandler {
             .warn("Could not send SuggestionShown request. the filename is null");
         return;
       }
-      this.binaryRequestFacade.executeRequest(
-          new SuggestionShownRequest(
-              completion.getNetLength(), filename, completion.completionMetadata));
-
-      if (completion.completionMetadata.getCompletion_kind() == CompletionKind.Snippet
-          && !isCached) {
-        Map<String, Object> context = completion.completionMetadata.getSnippet_context();
-        if (context == null) {
-          Logger.getInstance(getClass())
-              .warn("Could not send SnippetShown request. intent is null");
-          return;
-        }
-
-        this.binaryRequestFacade.executeRequest(new SnippetShownRequest(filename, context));
-      }
+//      this.binaryRequestFacade.executeRequest(
+//          new SuggestionShownRequest(
+//              completion.getNetLength(), filename, completion.completionMetadata));
+//
+//      if (completion.completionMetadata.getCompletion_kind() == CompletionKind.Snippet
+//          && !isCached) {
+//        Map<String, Object> context = completion.completionMetadata.getSnippet_context();
+//        if (context == null) {
+//          Logger.getInstance(getClass())
+//              .warn("Could not send SnippetShown request. intent is null");
+//          return;
+//        }
+//
+//        this.binaryRequestFacade.executeRequest(new SnippetShownRequest(filename, context));
+//      }
     } catch (RuntimeException e) {
       // swallow - nothing to do with this
     }

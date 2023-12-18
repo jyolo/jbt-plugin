@@ -23,9 +23,9 @@ public class BinaryRequestFacade {
     return binaryProcessRequesterProvider.get().pid();
   }
 
-  public <R extends BinaryResponse> R executeRequest(BinaryRequest<R> req) {
-    return executeRequest(req, COMPLETION_TIME_THRESHOLD);
-  }
+//  public <R extends BinaryResponse> R executeRequest(BinaryRequest<R> req) {
+//    return executeRequest(req, COMPLETION_TIME_THRESHOLD);
+//  }
 
   @Nullable
   public <R extends BinaryResponse> R executeRequest(BinaryRequest<R> req, int timeoutMillis) {
@@ -38,6 +38,7 @@ public class BinaryRequestFacade {
 //      if (result != null) {
 //        binaryProcessRequesterProvider.onSuccessfulRequest();
 //      }
+      System.out.println("----------------aiHttpHelper.request done----------------");
       return result;
     } catch (TimeoutException e) {
       e.printStackTrace();

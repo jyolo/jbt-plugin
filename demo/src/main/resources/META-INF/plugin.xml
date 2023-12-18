@@ -56,11 +56,11 @@
 <!--        <statusBarWidgetProvider implementation="com.qianliuAiUi.statusBar.StatusBarProvider"/>-->
 <!--        <statusBarWidgetProvider implementation="com.tabnine.statusBar.StatusBarProvider"/>-->
 <!--        &lt;!&ndash;        <statusBarWidgetProvider implementation="com.tabnine.statusBar.StatusBarPromotionProvider"/>&ndash;&gt;-->
-        <completion.contributor language="any" implementationClass="com.tabnine.intellij.completions.TabNineCompletionContributor" order="first"/>
 
-        <applicationService serviceImplementation="com.tabnineCommon.lifecycle.BinaryStateService"/>
+        <completion.contributor language="any" implementationClass="com.tabnine.intellij.completions.TabNineCompletionContributor" order="first"/>
+<!--        <applicationService serviceImplementation="com.tabnineCommon.lifecycle.BinaryStateService"/>-->
         <applicationService serviceImplementation="com.tabnineCommon.capabilities.CapabilitiesService"/>
-        <applicationService serviceImplementation="com.tabnineCommon.lifecycle.LifeCycleHelper"/>
+<!--        <applicationService serviceImplementation="com.tabnineCommon.lifecycle.LifeCycleHelper"/>-->
 
 
         <actionPromoter implementation="com.tabnineCommon.inline.InlineActionsPromoter"/>
@@ -74,7 +74,7 @@
         <action class="quickAsk.ShortCutAction" id="quickAskShortCutAction" text="qianliuAiUiQuickAsk" >
             <keyboard-shortcut first-keystroke="alt pressed I" keymap="$default" replace-all="true"/>
         </action>
-        <action class="compltion.MyCompletionActions" id="MyCompeltionAction" text="manual Completion">
+        <action class="com.tabnine.ShortCutAction" id="MyCompeltionAction" text="manual Completion">
             <keyboard-shortcut first-keystroke="alt pressed A" keymap="$default"/>
         </action>
 <!--        <action class="com.obiscr.tabnine.CompltionActions" id="CompeltionAction" text="manual Completion">-->

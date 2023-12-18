@@ -79,7 +79,7 @@ public class TabNineLookupListener implements LookupListener {
       selection.suggestionRenderingMode = RenderingMode.AUTOCOMPLETE;
       SelectionUtil.addSuggestionsCount(selection, suggestions);
 
-      binaryRequestFacade.executeRequest(new SetStateBinaryRequest(selection));
+//      binaryRequestFacade.executeRequest(new SetStateBinaryRequest(selection));
       this.statusBarUpdater.updateStatusBar();
     }
   }

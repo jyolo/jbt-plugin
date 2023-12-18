@@ -86,11 +86,8 @@ public class AIHttpHelper {
             String old_prefix = genOldPrefix(req.before);
             String old_suffix = genOldSuffix(req.before);
             String url = settingsState.getServerUrl();
-            System.out.println("((((((url))))))");
-            System.out.println(url);
-            System.out.println("((((((url))))))");
             ResponseVO responseVO = JavaHttpHelper.post(url, requestVO, instance.apiKey, req.completionAdjustment_hash_code);
-            System.out.println("responseVO:" + responseVO);
+
 
             AutocompleteResponse autocompleteResponse = new AutocompleteResponse();
             autocompleteResponse.setOld_prefix(old_prefix);
@@ -126,7 +123,6 @@ public class AIHttpHelper {
             autocompleteResponse.setAfter_code(req.after);
 
             System.out.println("autocompleteResponse response_id: " + responseVO.getId());
-//            System.out.println("autocompleteResponse response_text: " + responseVO.getChoices().get(0).getText());
 
             ApplicationInfo applicationInfo = ApplicationInfo.getInstance();
             String ideName = applicationInfo.getVersionName();

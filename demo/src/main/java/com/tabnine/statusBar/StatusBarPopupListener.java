@@ -13,6 +13,6 @@ public class StatusBarPopupListener implements JBPopupListener {
 
   @Override
   public void beforeShown(@NotNull LightweightWindowEvent event) {
-    binaryRequestFacade.executeRequest(new StatusBarInteractionRequest());
+//    binaryRequestFacade.executeRequest(new StatusBarInteractionRequest());
   }
 }

@@ -54,6 +54,9 @@ public class TabnineDocumentListener implements BulkAwareDocumentListener {
       InlineCompletionCache.getInstance().clear(editor);
       return;
     }
+    System.out.println("------------documentChangedNonBulk------------");
+    System.out.println(lastShownCompletion);
+    System.out.println("------------documentChangedNonBulk------------");
 
     handler.retrieveAndShowCompletion(
         editor,

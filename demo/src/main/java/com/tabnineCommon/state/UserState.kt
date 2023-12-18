@@ -5,14 +5,14 @@ import com.tabnineCommon.general.DependencyContainer
 import com.tabnineCommon.general.ServiceLevel
 
 class UserState private constructor() {
-    private val suggestionHintState: SuggestionHintState
+    private val suggestionHintState: SuggestionHintState = TODO()
     val serviceLevel: ServiceLevel?
 
     init {
         val binaryRequestFacade = DependencyContainer.instanceOfBinaryRequestFacade()
-        val stateResponse = binaryRequestFacade.executeRequest(StateRequest())
-        suggestionHintState = SuggestionHintState(stateResponse?.installationTime)
-        serviceLevel = stateResponse?.serviceLevel
+//        val stateResponse = binaryRequestFacade.executeRequest(StateRequest())
+//        suggestionHintState = SuggestionHintState(stateResponse?.installationTime)
+//        serviceLevel = stateResponse?.serviceLevel
     }
 
     companion object {

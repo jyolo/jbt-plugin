@@ -35,14 +35,14 @@ class CompletionPreviewInsertionHint(
             return
         }
 
-        InlineKeybindingHintUtil.createAndShowHint(
-            editor,
-            SwingUtilities.convertPoint(
-                mouseEvent.source as Component,
-                point,
-                editor.component.rootPane.layeredPane
-            )
-        )
+//        InlineKeybindingHintUtil.createAndShowHint(
+//            editor,
+//            SwingUtilities.convertPoint(
+//                mouseEvent.source as Component,
+//                point,
+//                editor.component.rootPane.layeredPane
+//            )
+//        )
     }
 
     override fun dispose() {

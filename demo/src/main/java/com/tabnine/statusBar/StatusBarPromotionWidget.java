@@ -92,16 +92,16 @@ public class StatusBarPromotionWidget extends EditorBasedWidget
   @Nullable
   public Consumer<MouseEvent> getClickConsumer() {
     return e -> {
-      if (!e.isPopupTrigger() && MouseEvent.BUTTON1 == e.getButton()) {
-        binaryRequestFacade.executeRequest(
-            new StatusBarPromotionActionRequest(
-                component.getId(), component.getText(), component.getActions()));
-        List<Object> actions = component.getActions();
-        if (actions != null && actions.stream().anyMatch(StaticConfig.OPEN_HUB_ACTION::equals)) {
-          actionVisitor.openHub();
-        }
-        clearMessage();
-      }
+//      if (!e.isPopupTrigger() && MouseEvent.BUTTON1 == e.getButton()) {
+//        binaryRequestFacade.executeRequest(
+//            new StatusBarPromotionActionRequest(
+//                component.getId(), component.getText(), component.getActions()));
+//        List<Object> actions = component.getActions();
+//        if (actions != null && actions.stream().anyMatch(StaticConfig.OPEN_HUB_ACTION::equals)) {
+//          actionVisitor.openHub();
+//        }
+//        clearMessage();
+//      }
     };
   }
 

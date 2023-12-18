@@ -29,7 +29,7 @@ public class HoverUpdater {
     final AtomicReference<Inlay> inlayHolder = new AtomicReference<>();
     final AtomicBoolean documentChanged = new AtomicBoolean(false);
     addInlayDisposer(editor, inlayHolder, documentChanged);
-    tryAddInlay(editor, caretOffset, inlayHolder, documentChanged);
+//    tryAddInlay(editor, caretOffset, inlayHolder, documentChanged);
   }
 
   private void tryAddInlay(
@@ -82,28 +82,28 @@ public class HoverUpdater {
       AtomicBoolean documentChanged,
       Editor editor,
       int inlayOffset) {
-    // get the inlay and hover popup data
-    HoverBinaryResponse hoverBinaryResponse =
-        this.binaryRequestFacade.executeRequest(new HoverBinaryRequest());
-    if (hoverBinaryResponse == null
-        || hoverBinaryResponse.getTitle() == null
-        || documentChanged.get()) {
-      return;
-    }
-    // inlay must be added from UI thread
-    ApplicationManager.getApplication()
-        .invokeLater(
-            () -> {
-              try {
-                addInlay(editor, inlayOffset, inlayHolder, documentChanged, hoverBinaryResponse);
-                this.binaryRequestFacade.executeRequest(new HintShownRequest(hoverBinaryResponse));
-              } catch (Exception e) {
-                if (e instanceof ControlFlowException) {
-                  throw e;
-                }
-                Logger.getInstance(getClass()).warn("Error adding locked item inlay.", e);
-              }
-            });
+//    // get the inlay and hover popup data
+//    HoverBinaryResponse hoverBinaryResponse =
+//        this.binaryRequestFacade.executeRequest(new HoverBinaryRequest());
+//    if (hoverBinaryResponse == null
+//        || hoverBinaryResponse.getTitle() == null
+//        || documentChanged.get()) {
+//      return;
+//    }
+//    // inlay must be added from UI thread
+//    ApplicationManager.getApplication()
+//        .invokeLater(
+//            () -> {
+//              try {
+//                addInlay(editor, inlayOffset, inlayHolder, documentChanged, hoverBinaryResponse);
+//                this.binaryRequestFacade.executeRequest(new HintShownRequest(hoverBinaryResponse));
+//              } catch (Exception e) {
+//                if (e instanceof ControlFlowException) {
+//                  throw e;
+//                }
+//                Logger.getInstance(getClass()).warn("Error adding locked item inlay.", e);
+//              }
+//            });
   }
 
   private void addInlay(

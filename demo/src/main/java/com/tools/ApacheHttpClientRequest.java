@@ -22,9 +22,6 @@ public class ApacheHttpClientRequest {
         this.requestUrl = requestUrl;
         this.requestBody = makeRequestJsonBody(requestData);
         this.requestHeaders = requestHeaders;
-        System.out.println("1111111111");
-        System.out.println(this.requestHeaders);
-        System.out.println("1111111111");
     }
 
     private StringEntity makeRequestJsonBody(Map<String, Object> requestData) {
@@ -47,12 +44,10 @@ public class ApacheHttpClientRequest {
         try {
 
             HttpResponse response = httpClient.execute(httpPost);
-            System.out.println(response.getAllHeaders());
 
             HttpEntity entity = response.getEntity();
 
             if (entity != null) {
-                System.out.println(entity.getContent());
                 // 获取输入流
 //                BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
 //
@@ -84,14 +79,9 @@ public class ApacheHttpClientRequest {
         try {
             HttpResponse response = httpClient.execute(httpPost);
             HttpEntity entity = response.getEntity();
-            System.out.println("22222");
-            System.out.println(entity.isStreaming());
-            System.out.println(entity.isChunked());
-            System.out.println("22222");
             if (entity != null) {
                 // 获取字符流
                 Reader source = new InputStreamReader(entity.getContent());
-                System.out.println(source.ready());
                 BufferedReader reader = new BufferedReader(source, 1);
                 reader.mark(1);
 //                 使用 BufferedReader 逐行读取

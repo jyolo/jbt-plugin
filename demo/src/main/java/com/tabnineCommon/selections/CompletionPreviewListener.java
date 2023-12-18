@@ -45,7 +45,7 @@ public class CompletionPreviewListener {
     selection.suggestionTrigger = completion.suggestionTrigger;
     extendSelectionRequest.accept(selection);
 
-    binaryRequestFacade.executeRequest(new SetStateBinaryRequest(selection));
+//    binaryRequestFacade.executeRequest(new SetStateBinaryRequest(selection));
     CompletionObserver.notifyListeners(editor);
   }
 }

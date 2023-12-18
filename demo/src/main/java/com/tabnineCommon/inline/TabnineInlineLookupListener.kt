@@ -11,6 +11,9 @@ class TabnineInlineLookupListener : LookupListener {
     private val completionsEventSender = DependencyContainer.instanceOfCompletionsEventSender()
 
     override fun currentItemChanged(event: LookupEvent) {
+
+        System.out.println("------------TabnineInlineLookupListener currentItemChanged------------");
+
         val eventItem = event.item
         if (!isCompletionsEnabled() || !event.lookup.isFocused || eventItem == null) {
             return
