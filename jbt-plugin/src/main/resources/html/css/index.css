@@ -1,0 +1,13 @@
+div {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 0px;
+    white-space: pre-wrap; /* 或者使用 white-space: normal; */
+}
+
+body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
