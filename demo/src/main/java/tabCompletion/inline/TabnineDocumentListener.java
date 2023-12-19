@@ -95,7 +95,7 @@ public class TabnineDocumentListener implements BulkAwareDocumentListener {
     };
 
     // 延迟1秒后执行任务
-    timer.schedule(task, 2000);
+    timer.schedule(task, 1500);
 
 
 

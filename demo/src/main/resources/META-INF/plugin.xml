@@ -57,7 +57,7 @@
 <!--        <statusBarWidgetProvider implementation="tabCompletion.statusBar.StatusBarProvider"/>-->
 <!--        &lt;!&ndash;        <statusBarWidgetProvider implementation="tabCompletion.statusBar.StatusBarPromotionProvider"/>&ndash;&gt;-->
 
-        <completion.contributor language="any" implementationClass="tabCompletion.intellij.completions.TabNineCompletionContributor" order="first"/>
+<!--        <completion.contributor language="any" implementationClass="tabCompletion.intellij.completions.TabNineCompletionContributor" order="first"/>-->
 <!--        <applicationService serviceImplementation="com.tabnineCommon.lifecycle.BinaryStateService"/>-->
         <applicationService serviceImplementation="tabCompletion.capabilities.CapabilitiesService"/>
 <!--        <applicationService serviceImplementation="com.tabnineCommon.lifecycle.LifeCycleHelper"/>-->

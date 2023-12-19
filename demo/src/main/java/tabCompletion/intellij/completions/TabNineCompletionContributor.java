@@ -68,11 +68,14 @@ public class TabNineCompletionContributor extends CompletionContributor {
 //    if (!suggestionsModeService.getSuggestionMode().isPopupEnabled()) {
 //      return;
 //    }
-    registerLookupListener(parameters, tabNineLookupListener);
-    AutocompleteResponse completions =
-        this.completionFacade.retrieveCompletions(
-            parameters, GraphicsUtilsKt.getTabSize(parameters.getEditor()));
 
+//    registerLookupListener(parameters, tabNineLookupListener);
+//    AutocompleteResponse completions =
+//        this.completionFacade.retrieveCompletions(
+//            parameters, GraphicsUtilsKt.getTabSize(parameters.getEditor()));
+
+    AutocompleteResponse completions = null;
+    System.out.println("111111111111111111111111111111");
     if (completions == null) {
       return;
     }
