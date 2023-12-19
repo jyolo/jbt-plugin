@@ -6,11 +6,10 @@ import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.XmlSerializerUtil
-import com.tabnineCommon.userSettings.settingsDefaultColor
+import tabCompletion.inline.render.GraphicsUtils
 
-//import com.obiscr.tabnine.inline.render.GraphicsUtils
-//
-//val settingsDefaultColor = GraphicsUtils.niceContrastColor.rgb
+
+val settingsDefaultColor = GraphicsUtils.niceContrastColor.rgb
 
 /**
  * This package (`userSettings`) is heavily influenced by the docs from here:

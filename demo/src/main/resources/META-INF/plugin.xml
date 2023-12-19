@@ -54,27 +54,28 @@
 <!--        <preloadingActivity implementation="com.obiscr.tabnine.general.GettingStartedManager"/>-->
 <!--        <postStartupActivity implementation="com.obiscr.tabnine.Initializer"/>-->
 <!--        <statusBarWidgetProvider implementation="com.qianliuAiUi.statusBar.StatusBarProvider"/>-->
-<!--        <statusBarWidgetProvider implementation="com.tabnine.statusBar.StatusBarProvider"/>-->
-<!--        &lt;!&ndash;        <statusBarWidgetProvider implementation="com.tabnine.statusBar.StatusBarPromotionProvider"/>&ndash;&gt;-->
+<!--        <statusBarWidgetProvider implementation="tabCompletion.statusBar.StatusBarProvider"/>-->
+<!--        &lt;!&ndash;        <statusBarWidgetProvider implementation="tabCompletion.statusBar.StatusBarPromotionProvider"/>&ndash;&gt;-->
 
-        <completion.contributor language="any" implementationClass="com.tabnine.intellij.completions.TabNineCompletionContributor" order="first"/>
+        <completion.contributor language="any" implementationClass="tabCompletion.intellij.completions.TabNineCompletionContributor" order="first"/>
 <!--        <applicationService serviceImplementation="com.tabnineCommon.lifecycle.BinaryStateService"/>-->
-        <applicationService serviceImplementation="com.tabnineCommon.capabilities.CapabilitiesService"/>
+        <applicationService serviceImplementation="tabCompletion.capabilities.CapabilitiesService"/>
 <!--        <applicationService serviceImplementation="com.tabnineCommon.lifecycle.LifeCycleHelper"/>-->
+        <editorFactoryDocumentListener implementation="tabCompletion.inline.TabnineDocumentListener"/>
+
+        <actionPromoter implementation="tabCompletion.inline.InlineActionsPromoter"/>
+        <editorActionHandler action="EditorEscape" implementationClass="tabCompletion.inline.EscapeHandler" id="previewEscape" order="before hide-hints"/>
 
 
-        <actionPromoter implementation="com.tabnineCommon.inline.InlineActionsPromoter"/>
-        <editorActionHandler action="EditorEscape" implementationClass="com.tabnineCommon.inline.EscapeHandler" id="previewEscape" order="before hide-hints"/>
-        <editorFactoryDocumentListener implementation="com.tabnineCommon.inline.TabnineDocumentListener"/>
-        <fileType name="Tabnine project model file" implementationClass="com.tabnine.TabnineProjectModelFileType" extensions="tabnine,.tabnine,tabnine.model,.tabnine.model,model,.model"/>
-        <fileType name="Tabnine ignore file" implementationClass="com.tabnine.TabnineIgnoreFileType" extensions="tabnineignore"/>
+        <fileType name="Tabnine project model file" implementationClass="tabCompletion.TabnineProjectModelFileType" extensions="tabnine,.tabnine,tabnine.model,.tabnine.model,model,.model"/>
+        <fileType name="Tabnine ignore file" implementationClass="tabCompletion.TabnineIgnoreFileType" extensions="tabnineignore"/>
     </extensions>
 
     <actions>
         <action class="quickAsk.ShortCutAction" id="quickAskShortCutAction" text="qianliuAiUiQuickAsk" >
             <keyboard-shortcut first-keystroke="alt pressed I" keymap="$default" replace-all="true"/>
         </action>
-        <action class="com.tabnine.ShortCutAction" id="MyCompeltionAction" text="manual Completion">
+        <action class="tabCompletion.ShortCutAction" id="MyCompeltionAction" text="manual Completion">
             <keyboard-shortcut first-keystroke="alt pressed A" keymap="$default"/>
         </action>
 <!--        <action class="com.obiscr.tabnine.CompltionActions" id="CompeltionAction" text="manual Completion">-->
@@ -89,7 +90,7 @@
 <!--        <action class="com.obiscr.tabnine.inline.ShowPreviousTabnineInlineCompletionAction" id="ShowPreviousTabnineInlineCompletionAction" text="Show Previous Inline Completion">-->
 <!--            <keyboard-shortcut first-keystroke="alt OPEN_BRACKET" keymap="$default"/>-->
 <!--        </action>-->
-        <action class="com.tabnineCommon.inline.AcceptTabnineInlineCompletionAction" id="AcceptTabnineInlineCompletionAction" text="Accept Inline Completion">
+        <action class="tabCompletion.inline.AcceptTabnineInlineCompletionAction" id="AcceptTabnineInlineCompletionAction" text="Accept Inline Completion">
             <keyboard-shortcut first-keystroke="TAB" keymap="$default"/>
         </action>
         <group id="ChatGPT" text="Search with ChatGPT" description="Search with ChatGPT">

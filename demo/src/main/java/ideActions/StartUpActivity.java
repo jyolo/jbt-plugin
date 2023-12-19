@@ -3,6 +3,7 @@ package ideActions;
 import browse.CustomProxyServlet;
 import browse.JcefBrowserService;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -38,8 +39,8 @@ public class StartUpActivity implements StartupActivity.DumbAware{
         ApplicationManager.getApplication().invokeLater(() -> {
             Editor editor = FileEditorManager.getInstance(project).getSelectedTextEditor();
             if (editor != null){
-//                Document document = editor.getDocument();
-//                document.addDocumentListener(new ChangeDocumentListener());
+                Document document = editor.getDocument();
+                document.addDocumentListener(new ChangeDocumentListener());
                 FileEditorManager.getInstance(project).addFileEditorManagerListener(new CloseDocumentListener());
             }
         });

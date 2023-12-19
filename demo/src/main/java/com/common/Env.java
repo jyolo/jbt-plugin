@@ -1,1 +1,1 @@
-package com.common;  public class Env {     public static String qianLiuServerUrl = "http://127.0.0.1:8000"; }
+package com.common;  public class Env {     public static String qianLiuServerUrl = "http://100.68.105.98:8000"; }
