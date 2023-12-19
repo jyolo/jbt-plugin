@@ -25,8 +25,13 @@ import tabCompletion.inline.InlineCompletionHandler;
 import tabCompletion.prediction.TabNineCompletion;
 import tabCompletion.state.CompletionsState;
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 public class TabnineDocumentListener implements BulkAwareDocumentListener {
   private final InlineCompletionHandler handler = singletonOfInlineCompletionHandler();
@@ -34,6 +39,7 @@ public class TabnineDocumentListener implements BulkAwareDocumentListener {
   private final CompletionsEventSender completionsEventSender =
       DependencyContainer.instanceOfCompletionsEventSender();
 
+  Timer timer;
   @Override
   public void documentChangedNonBulk(@NotNull DocumentEvent event) {
     if (!CompletionsState.INSTANCE.isCompletionsEnabled()) {
@@ -61,12 +67,38 @@ public class TabnineDocumentListener implements BulkAwareDocumentListener {
     System.out.println(lastShownCompletion);
     System.out.println("------------documentChangedNonBulk------------");
 
-    handler.retrieveAndShowCompletion(
-        editor,
-        offset,
-        lastShownCompletion,
-        event.getNewFragment().toString(),
-        new DefaultCompletionAdjustment());
+    if (timer != null) {
+      timer.cancel();
+      System.out.println("completion 定时器已存在");
+      timer = null;
+    }
+
+    // 创建定时器
+    timer = new Timer();
+    // 创建定时任务
+    TimerTask task = new TimerTask() {
+      @Override
+      public void run() {
+        timer = null;
+        SwingUtilities.invokeLater(() -> {
+          System.out.println("completion 定时器开始执行");
+          handler.retrieveAndShowCompletion(
+                  editor,
+                  offset,
+                  lastShownCompletion,
+                  event.getNewFragment().toString(),
+                  new DefaultCompletionAdjustment());
+
+        });
+
+      }
+    };
+
+    // 延迟1秒后执行任务
+    timer.schedule(task, 2000);
+
+
+
   }
 
   private boolean shouldIgnoreChange(
