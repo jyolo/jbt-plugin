@@ -53,7 +53,7 @@
 <!--        <preloadingActivity implementation="com.obiscr.tabnine.Initializer"/>-->
 <!--        <preloadingActivity implementation="com.obiscr.tabnine.general.GettingStartedManager"/>-->
 <!--        <postStartupActivity implementation="com.obiscr.tabnine.Initializer"/>-->
-<!--        <statusBarWidgetProvider implementation="com.qianliuAiUi.statusBar.StatusBarProvider"/>-->
+        <statusBarWidgetProvider implementation="statusBar.StatusBarProvider"/>
 <!--        <statusBarWidgetProvider implementation="tabCompletion.statusBar.StatusBarProvider"/>-->
 <!--        &lt;!&ndash;        <statusBarWidgetProvider implementation="tabCompletion.statusBar.StatusBarPromotionProvider"/>&ndash;&gt;-->
 
