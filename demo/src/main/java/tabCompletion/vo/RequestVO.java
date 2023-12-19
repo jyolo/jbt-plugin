@@ -4,7 +4,7 @@ package tabCompletion.vo;
 public class RequestVO {
 
     String prompt;
-    //    int max_tokens;
+    String action;
     Boolean stream = Boolean.FALSE;
     double temperature;
     String model;
@@ -49,6 +49,10 @@ public class RequestVO {
 
     public void setStream(Boolean stream) {
         this.stream = stream;
+    }
+
+    public void setAction(String action){
+        this.action = action;
     }
 
     public String getPrompt() {

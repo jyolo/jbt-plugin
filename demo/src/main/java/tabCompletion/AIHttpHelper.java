@@ -65,6 +65,7 @@ public class AIHttpHelper {
         // fillModel 默认为true
         String prompt = String.format("%s%s%s", req.before, FIM_INDICATOR, req.after);
         requestVO.setPrompt(prompt);
+
 //        if (settingsState.getFillMode()) {
 //            String prompt = String.format("%s%s%s", req.before, FIM_INDICATOR, req.after);
 //            requestVO.setPrompt(prompt);
@@ -80,6 +81,7 @@ public class AIHttpHelper {
 //        requestVO.setRepo(Snippet.projectName);
 //        requestVO.setUserId(getUserId());
         requestVO.setGitpath(req.git_path);
+        requestVO.setAction("code_completion");
         System.out.println("requestVO:" + requestVO);
 
 //        AppSettingsState appSettingsState = AppSettingsState.getInstance();
