@@ -63,6 +63,7 @@
 <!--        <applicationService serviceImplementation="com.tabnineCommon.lifecycle.LifeCycleHelper"/>-->
         <editorFactoryDocumentListener implementation="tabCompletion.inline.TabnineDocumentListener"/>
 
+
         <actionPromoter implementation="tabCompletion.inline.InlineActionsPromoter"/>
         <editorActionHandler action="EditorEscape" implementationClass="tabCompletion.inline.EscapeHandler" id="previewEscape" order="before hide-hints"/>
 
