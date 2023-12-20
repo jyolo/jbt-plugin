@@ -55,8 +55,9 @@ public class JavaHttpHelper {
         connection.setRequestMethod("POST");
 
         // set request header
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setRequestProperty("Accept", "application/json");
+
+        connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        connection.setRequestProperty("Accept", "application/json; charset=UTF-8");
         connection.setRequestProperty("Authorization", "Bearer " + apiKey);
         JavaHttpHelper http = new JavaHttpHelper();
         connection.setRequestProperty("ide", http.getIdeName());

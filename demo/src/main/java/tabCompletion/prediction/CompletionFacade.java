@@ -35,23 +35,23 @@ public class CompletionFacade {
     this.binaryRequestFacade = binaryRequestFacade;
     this.suggestionsModeService = suggestionsModeService;
   }
-
-  @Nullable
-  public AutocompleteResponse retrieveCompletions(
-      CompletionParameters parameters, @Nullable Integer tabSize) {
-    try {
-      String filename = getFilename(parameters.getOriginalFile().getVirtualFile());
-      return ApplicationUtil.runWithCheckCanceled(
-          () ->
-              retrieveCompletions(
-                  parameters.getEditor(), parameters.getOffset(), filename, tabSize, null),
-          ProgressManager.getInstance().getProgressIndicator());
-    } catch (BinaryCannotRecoverException e) {
-      throw e;
-    } catch (Exception e) {
-      return null;
-    }
-  }
+//
+//  @Nullable
+//  public AutocompleteResponse retrieveCompletions(
+//      CompletionParameters parameters, @Nullable Integer tabSize) {
+//    try {
+//      String filename = getFilename(parameters.getOriginalFile().getVirtualFile());
+//      return ApplicationUtil.runWithCheckCanceled(
+//          () ->
+//              retrieveCompletions(
+//                  parameters.getEditor(), parameters.getOffset(), filename, tabSize, null),
+//          ProgressManager.getInstance().getProgressIndicator());
+//    } catch (BinaryCannotRecoverException e) {
+//      throw e;
+//    } catch (Exception e) {
+//      return null;
+//    }
+//  }
 
   @Nullable
   public AutocompleteResponse retrieveCompletions(

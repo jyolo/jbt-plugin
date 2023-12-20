@@ -43,9 +43,9 @@ public class BinaryRequestFacade {
               AppExecutorUtil.getAppExecutorService()
                       .submit(() -> aiHttpHelper.request(req))
                       .get(timeoutMillis, TimeUnit.MILLISECONDS);
-//      if (result != null) {
-//        binaryProcessRequesterProvider.onSuccessfulRequest();
-//      }
+      if (result != null) {
+        binaryProcessRequesterProvider.onSuccessfulRequest();
+      }
       System.out.println("----------------aiHttpHelper.request done----------------");
       return result;
     } catch (TimeoutException e) {
