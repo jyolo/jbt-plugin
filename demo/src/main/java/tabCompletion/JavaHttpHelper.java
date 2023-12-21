@@ -64,8 +64,10 @@ public class JavaHttpHelper {
         connection.setRequestProperty("ide-version", http.getIdeVersion());
         connection.setRequestProperty("ide-real-version", http.getIdeRealVersion());
         connection.setRequestProperty("ide-real-version", http.getIdeRealVersion());
-        connection.setRequestProperty("model", "gemini-pro");
-        connection.setRequestProperty("service", "gemini");
+//        connection.setRequestProperty("model", "gemini-pro");
+//        connection.setRequestProperty("service", "gemini");
+        connection.setRequestProperty("model", "gpt-3.5-turbo-instruct");
+        connection.setRequestProperty("service", "openai");
 
         // enable output
         connection.setDoOutput(true);

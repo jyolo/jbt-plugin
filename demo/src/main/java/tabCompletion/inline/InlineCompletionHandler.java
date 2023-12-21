@@ -75,12 +75,12 @@ public class InlineCompletionHandler {
     ObjectUtils.doIfNotNull(lastFetchAndRenderTask, task -> task.cancel(false));
     ObjectUtils.doIfNotNull(lastDebounceRenderTask, task -> task.cancel(false));
 
-    List<TabNineCompletion> cachedCompletions =
-        InlineCompletionCache.getInstance().retrieveAdjustedCompletions(editor, userInput);
-    if (!cachedCompletions.isEmpty()) {
-      renderCachedCompletions(editor, offset, tabSize, cachedCompletions, completionAdjustment);
-      return;
-    }
+//    List<TabNineCompletion> cachedCompletions =
+//        InlineCompletionCache.getInstance().retrieveAdjustedCompletions(editor, userInput);
+//    if (!cachedCompletions.isEmpty()) {
+//      renderCachedCompletions(editor, offset, tabSize, cachedCompletions, completionAdjustment);
+//      return;
+//    }
 
 //    if (lastShownSuggestion != null) {
 //      SuggestionDroppedReason reason =
@@ -138,6 +138,10 @@ public class InlineCompletionHandler {
                       ? logAndGetEmptySuggestionsDebounceMillis()
                       : CompletionTracker.calcDebounceTimeMs(editor, completionAdjustment);
 
+              System.out.println("debounceTimeMs");
+              System.out.println(debounceTimeMs);
+              System.out.println(beforeDebounceCompletions);
+              System.out.println("debounceTimeMs");
               if (debounceTimeMs == 0) {
                 rerenderCompletion(
                     editor,
@@ -148,8 +152,7 @@ public class InlineCompletionHandler {
                 return;
               }
 
-              refetchCompletionsAfterDebounce(
-                  editor, tabSize, offset, modificationStamp, completionAdjustment, debounceTimeMs);
+//              refetchCompletionsAfterDebounce(editor, tabSize, offset, modificationStamp, completionAdjustment, debounceTimeMs);
             });
   }
 
@@ -261,7 +264,9 @@ public class InlineCompletionHandler {
     if (displayedCompletion == null) {
       return;
     }
-
+    System.out.println("onCompletionPreviewUpdatedCallback");
+    System.out.println(onCompletionPreviewUpdatedCallback);
+    System.out.println("onCompletionPreviewUpdatedCallback");
     if (onCompletionPreviewUpdatedCallback != null) {
       onCompletionPreviewUpdatedCallback.onCompletionPreviewUpdated(displayedCompletion);
     }

@@ -61,9 +61,12 @@ public class TabnineDocumentListener implements BulkAwareDocumentListener {
 
     if (shouldIgnoreChange(event, editor, offset, lastShownCompletion)) {
       InlineCompletionCache.getInstance().clear(editor);
+      System.out.println("------------shouldIgnoreChange------------");
       return;
     }
     System.out.println("------------documentChangedNonBulk------------");
+    System.out.println(event.getOffset());
+    System.out.println(event.getNewLength());
     System.out.println(lastShownCompletion);
     System.out.println("------------documentChangedNonBulk------------");
 
@@ -95,7 +98,7 @@ public class TabnineDocumentListener implements BulkAwareDocumentListener {
     };
 
     // 延迟1秒后执行任务
-    timer.schedule(task, 1500);
+    timer.schedule(task, 500);
 
 
 

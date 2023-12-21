@@ -57,7 +57,11 @@ class DefaultTabnineInlay(parent: Disposable) : TabnineInlay {
         if (lines.isEmpty()) return
         val firstLine = lines[0]
         val endIndex = firstLine.indexOf(completion.oldSuffix)
-
+        System.out.println("-------------render-------------")
+        System.out.println(completion)
+        System.out.println(completion.suffix)
+        System.out.println(completion.oldSuffix)
+        System.out.println("-------------render-------------")
         val instructions = determineRendering(lines, completion.oldSuffix)
 
         when (instructions.firstLine) {
