@@ -26,16 +26,21 @@ fun determineRendering(textLines: List<String>, oldSuffix: String): RenderingIns
     val shouldRenderBlock = textLines.size > 1
 
     if (textLines[0].trim().isNotEmpty()) {
+        println("11111111111111111")
         if (oldSuffix.trim().isNotEmpty()) {
+            println("22222222222222")
             val endIndex = textLines[0].indexOf(oldSuffix)
-
+            println(endIndex)
             if (endIndex == 0) return RenderingInstructions(FirstLineRendering.SuffixOnly, shouldRenderBlock)
             else if (endIndex > 0) return RenderingInstructions(
                     FirstLineRendering.BeforeAndAfterSuffix,
                     shouldRenderBlock
             )
         }
-
+        println("3333333333333333333333")
+        println(textLines)
+        println(oldSuffix)
+        println(shouldRenderBlock)
         return RenderingInstructions(FirstLineRendering.NoSuffix, shouldRenderBlock)
     }
 
@@ -91,13 +96,8 @@ class DefaultTabnineInlay(parent: Disposable) : TabnineInlay {
         if (lines.isEmpty()) return
         val firstLine = lines[0]
         val endIndex = firstLine.indexOf(completion.oldSuffix)
-        System.out.println("-------------render-------------")
-        System.out.println(completion)
-        System.out.println(completion.suffix)
-        System.out.println(completion.oldSuffix)
-        System.out.println("-------------render-------------")
-        val instructions = determineRendering(lines, completion.oldSuffix)
 
+        val instructions = determineRendering(lines, completion.oldSuffix)
         when (instructions.firstLine) {
             FirstLineRendering.NoSuffix -> {
                 renderNoSuffix(editor, firstLine, completion, offset)
@@ -114,6 +114,9 @@ class DefaultTabnineInlay(parent: Disposable) : TabnineInlay {
 
         if (instructions.shouldRenderBlock) {
             val otherLines = lines.stream().skip(1).collect(Collectors.toList())
+            println("55555555555555")
+            println(lines)
+            println(otherLines)
             renderBlock(otherLines, editor, completion, offset)
         }
 
